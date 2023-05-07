@@ -44,50 +44,39 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDS6UCbSoXtrpuonXt45r2EPA1HGjXus2k',
-    appId: '1:94354689411:web:4f5b8251918206292dfab6',
-    messagingSenderId: '94354689411',
-    projectId: 'flutter-expenses-app-f477a',
-    authDomain: 'flutter-expenses-app-f477a.firebaseapp.com',
-    databaseURL:
-        'https://flutter-expenses-app-f477a-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'flutter-expenses-app-f477a.appspot.com',
-    measurementId: 'G-BR5JEPDXVG',
+    apiKey: 'AIzaSyAJCDPOE9YnI8OuLDIttopoo-AXtQ3oTgY',
+    appId: '1:1026254620863:web:6863d47d5e321f8d5f1e0a',
+    messagingSenderId: '1026254620863',
+    projectId: 'time-mgmt-app-flutter',
+    authDomain: 'time-mgmt-app-flutter.firebaseapp.com',
+    storageBucket: 'time-mgmt-app-flutter.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCBwa5wXl9VvoMNnsqjQbt9UEg7QcrQzro',
-    appId: '1:94354689411:android:9ca0ceb3aa1774682dfab6',
-    messagingSenderId: '94354689411',
-    projectId: 'flutter-expenses-app-f477a',
-    databaseURL:
-        'https://flutter-expenses-app-f477a-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'flutter-expenses-app-f477a.appspot.com',
+    apiKey: 'AIzaSyCf3jwx8RkJ2qEbGMFQik-LfA7UxXGf7J4',
+    appId: '1:1026254620863:android:532a5ca47c73dbfe5f1e0a',
+    messagingSenderId: '1026254620863',
+    projectId: 'time-mgmt-app-flutter',
+    storageBucket: 'time-mgmt-app-flutter.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDhUceWNS6dzdcuhlfORI7nrZEHVT1u7_w',
-    appId: '1:94354689411:ios:1511a7bbbf1a9ef22dfab6',
-    messagingSenderId: '94354689411',
-    projectId: 'flutter-expenses-app-f477a',
-    databaseURL:
-        'https://flutter-expenses-app-f477a-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'flutter-expenses-app-f477a.appspot.com',
-    iosClientId:
-        '94354689411-g5nd2j8ittj4teind0h4ffu8qedmtgmj.apps.googleusercontent.com',
-    iosBundleId: 'com.example.expensesApp',
+    apiKey: 'AIzaSyABBWEhQSx4idJUVo1G055gYhaWIJiUN6A',
+    appId: '1:1026254620863:ios:ea7b809301d162015f1e0a',
+    messagingSenderId: '1026254620863',
+    projectId: 'time-mgmt-app-flutter',
+    storageBucket: 'time-mgmt-app-flutter.appspot.com',
+    iosClientId: '1026254620863-91k07at9r1qpr1cd1vjjitffdq7mq8s5.apps.googleusercontent.com',
+    iosBundleId: 'com.example.timeMgmtApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDhUceWNS6dzdcuhlfORI7nrZEHVT1u7_w',
-    appId: '1:94354689411:ios:1511a7bbbf1a9ef22dfab6',
-    messagingSenderId: '94354689411',
-    projectId: 'flutter-expenses-app-f477a',
-    databaseURL:
-        'https://flutter-expenses-app-f477a-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'flutter-expenses-app-f477a.appspot.com',
-    iosClientId:
-        '94354689411-g5nd2j8ittj4teind0h4ffu8qedmtgmj.apps.googleusercontent.com',
-    iosBundleId: 'com.example.expensesApp',
+    apiKey: 'AIzaSyABBWEhQSx4idJUVo1G055gYhaWIJiUN6A',
+    appId: '1:1026254620863:ios:ea7b809301d162015f1e0a',
+    messagingSenderId: '1026254620863',
+    projectId: 'time-mgmt-app-flutter',
+    storageBucket: 'time-mgmt-app-flutter.appspot.com',
+    iosClientId: '1026254620863-91k07at9r1qpr1cd1vjjitffdq7mq8s5.apps.googleusercontent.com',
+    iosBundleId: 'com.example.timeMgmtApp',
   );
 }
