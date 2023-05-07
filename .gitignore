@@ -50,3 +50,6 @@ node_modules
 
 # exclude google settings Firebase
 google-services.json
+
+# exclude firebase binary
+firebase-tools-instant-win.exe
