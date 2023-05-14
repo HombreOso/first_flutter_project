@@ -6,10 +6,6 @@ import '../widgets/transaction_list.dart';
 import '../widgets/chart.dart';
 import '../models/transaction.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-import '../firebase_options.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';

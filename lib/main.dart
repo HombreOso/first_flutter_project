@@ -5,22 +5,11 @@ import 'package:flutter_complete_guide/screens/splash_screen.dart';
 
 import '../screens/expenses_screen.dart';
 
-import './widgets/new_transaction.dart';
-import './widgets/transaction_list.dart';
-import './widgets/chart.dart';
-import './models/transaction.dart';
 import 'screens/add_categories_screen.dart';
-import 'screens/auth_screen.dart';
 import 'screens/forgot_password_screen.dart';
-import 'screens/confirm_email_screen.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

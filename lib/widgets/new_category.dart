@@ -1,10 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../models/category.dart';
-import './dropdownExpenseCategories.dart';
 
 class NewCategory extends StatefulWidget {
   final Function addCt;

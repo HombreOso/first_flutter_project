@@ -1,11 +1,8 @@
-import 'dart:io';
 
 //import 'package:cross_file/src/types/interface.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'package:flutter_complete_guide/widgets/pickers/user_image_picker.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../screens/forgot_password_screen.dart';
 

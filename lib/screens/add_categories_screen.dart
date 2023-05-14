@@ -1,18 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../widgets/new_category.dart';
-import '../widgets/new_transaction.dart';
-import '../widgets/transaction_list.dart';
-import '../widgets/chart.dart';
-import '../models/transaction.dart';
 import '../models/category.dart';
 import '../widgets/categories_list.dart';
-import '../firebase_options.dart';
 
 class CategoryScreen extends StatefulWidget {
   @override
