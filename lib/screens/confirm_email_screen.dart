@@ -26,15 +26,18 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   checkEmailVerified() async {
     await FirebaseAuth.instance.currentUser?.reload();
 
-    setState(() {
-      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-    });
+    if (this.mounted) {
+      setState(() {
+        isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
+      });
+    }
+    ;
     print("Email verified: $isEmailVerified");
     if (isEmailVerified) {
       // TODO: implement your code after email verification
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Email Successfully Verified")));
-      Navigator.of(context).pop();
+      Navigator.pushNamed(context, '/expenses');
 
       timer?.cancel();
     }

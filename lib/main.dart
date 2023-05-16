@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
               return SplashScreen();
             }
             if (userSnapshot.hasData) {
-              return MyHomePage();
+              return EmailVerificationScreen();
             }
             return AuthPage();
           }),
