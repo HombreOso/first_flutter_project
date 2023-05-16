@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:1026254620863:ios:ea7b809301d162015f1e0a",
-  "FIREBASE_PROJECT_ID": "time-mgmt-app-flutter",
-  "GCM_SENDER_ID": "1026254620863"
+  "GOOGLE_APP_ID": "1:431625325710:ios:d51584eaf96ca1b7368ddf",
+  "FIREBASE_PROJECT_ID": "time-mgmt-app-flutter-ff81e",
+  "GCM_SENDER_ID": "431625325710"
 }

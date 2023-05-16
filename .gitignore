@@ -53,3 +53,4 @@ google-services.json
 
 # exclude firebase binary
 firebase-tools-instant-win.exe
+firebase.exe

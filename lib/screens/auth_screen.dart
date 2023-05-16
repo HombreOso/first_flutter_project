@@ -29,6 +29,8 @@ class _AuthPageState extends State<AuthPage> {
           .createUserWithEmailAndPassword(email: userEmail, password: password);
       final CollectionReference usersCollectionRef =
           FirebaseFirestore.instance.collection('users');
+      print("user $userEmail");
+      print("password $password");
       usersCollectionRef.add(
         {
           'username': _usernameController.text.trim(),

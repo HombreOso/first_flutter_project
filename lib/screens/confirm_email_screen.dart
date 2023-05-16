@@ -29,7 +29,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
     setState(() {
       isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
     });
-
+    print("Email verified: $isEmailVerified");
     if (isEmailVerified) {
       // TODO: implement your code after email verification
       ScaffoldMessenger.of(context)

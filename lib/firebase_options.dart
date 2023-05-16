@@ -44,39 +44,44 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAJCDPOE9YnI8OuLDIttopoo-AXtQ3oTgY',
-    appId: '1:1026254620863:web:6863d47d5e321f8d5f1e0a',
-    messagingSenderId: '1026254620863',
-    projectId: 'time-mgmt-app-flutter',
-    authDomain: 'time-mgmt-app-flutter.firebaseapp.com',
-    storageBucket: 'time-mgmt-app-flutter.appspot.com',
+    apiKey: 'AIzaSyA_yXIpo-xsscCdMjEI-9r6Jg-8ihI5riY',
+    appId: '1:431625325710:web:8f89c2a602164bc0368ddf',
+    messagingSenderId: '431625325710',
+    projectId: 'time-mgmt-app-flutter-ff81e',
+    authDomain: 'time-mgmt-app-flutter-ff81e.firebaseapp.com',
+    databaseURL: 'https://time-mgmt-app-flutter-ff81e-default-rtdb.firebaseio.com',
+    storageBucket: 'time-mgmt-app-flutter-ff81e.appspot.com',
+    measurementId: 'G-DDDN0327CP',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCf3jwx8RkJ2qEbGMFQik-LfA7UxXGf7J4',
-    appId: '1:1026254620863:android:532a5ca47c73dbfe5f1e0a',
-    messagingSenderId: '1026254620863',
-    projectId: 'time-mgmt-app-flutter',
-    storageBucket: 'time-mgmt-app-flutter.appspot.com',
+    apiKey: 'AIzaSyACncsPWJudJn_pUkgO6-AETfQcKx8e8dU',
+    appId: '1:431625325710:android:003072c89d455a3e368ddf',
+    messagingSenderId: '431625325710',
+    projectId: 'time-mgmt-app-flutter-ff81e',
+    databaseURL: 'https://time-mgmt-app-flutter-ff81e-default-rtdb.firebaseio.com',
+    storageBucket: 'time-mgmt-app-flutter-ff81e.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyABBWEhQSx4idJUVo1G055gYhaWIJiUN6A',
-    appId: '1:1026254620863:ios:ea7b809301d162015f1e0a',
-    messagingSenderId: '1026254620863',
-    projectId: 'time-mgmt-app-flutter',
-    storageBucket: 'time-mgmt-app-flutter.appspot.com',
-    iosClientId: '1026254620863-91k07at9r1qpr1cd1vjjitffdq7mq8s5.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDDwog5wtKzIVuShl2SVdY2ywBZEdvgG40',
+    appId: '1:431625325710:ios:d51584eaf96ca1b7368ddf',
+    messagingSenderId: '431625325710',
+    projectId: 'time-mgmt-app-flutter-ff81e',
+    databaseURL: 'https://time-mgmt-app-flutter-ff81e-default-rtdb.firebaseio.com',
+    storageBucket: 'time-mgmt-app-flutter-ff81e.appspot.com',
+    iosClientId: '431625325710-soa4mlucijphlgj4951rcsophfaksh52.apps.googleusercontent.com',
     iosBundleId: 'com.example.timeMgmtApp',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyABBWEhQSx4idJUVo1G055gYhaWIJiUN6A',
-    appId: '1:1026254620863:ios:ea7b809301d162015f1e0a',
-    messagingSenderId: '1026254620863',
-    projectId: 'time-mgmt-app-flutter',
-    storageBucket: 'time-mgmt-app-flutter.appspot.com',
-    iosClientId: '1026254620863-91k07at9r1qpr1cd1vjjitffdq7mq8s5.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDDwog5wtKzIVuShl2SVdY2ywBZEdvgG40',
+    appId: '1:431625325710:ios:d51584eaf96ca1b7368ddf',
+    messagingSenderId: '431625325710',
+    projectId: 'time-mgmt-app-flutter-ff81e',
+    databaseURL: 'https://time-mgmt-app-flutter-ff81e-default-rtdb.firebaseio.com',
+    storageBucket: 'time-mgmt-app-flutter-ff81e.appspot.com',
+    iosClientId: '431625325710-soa4mlucijphlgj4951rcsophfaksh52.apps.googleusercontent.com',
     iosBundleId: 'com.example.timeMgmtApp',
   );
 }
