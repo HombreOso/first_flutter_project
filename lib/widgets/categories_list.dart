@@ -118,13 +118,24 @@ class CategoriesList extends StatelessWidget {
                     child: ListTile(
                       leading: CircleAvatar(
                         radius: 30,
-                        child: Padding(
-                          padding: EdgeInsets.all(6),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            gradient: LinearGradient(
+                              colors: [
+                                Colors.lightBlueAccent,
+                                Colors.lightGreenAccent,
+                              ],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ),
+                          ),
                           child: FittedBox(
                             child: Text(
                                 '\$${categories[index].amount.toStringAsFixed(0)}'),
                           ),
                         ),
+                        backgroundColor: Theme.of(context).primaryColor,
                       ),
                       title: Text(
                         categories[index].name,

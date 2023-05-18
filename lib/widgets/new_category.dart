@@ -77,7 +77,7 @@ class _NewCategoryState extends State<NewCategory> {
               // },
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Amount'),
+              decoration: InputDecoration(labelText: 'Weekly Time'),
               controller: _amountController,
               keyboardType: TextInputType.number,
               onSubmitted: (_) => _usedDefaultDate ? null : _submitData(),
