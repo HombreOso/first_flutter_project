@@ -72,8 +72,12 @@ class _NewCategoryState extends State<NewCategory> {
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.amber),
+                    borderSide:
+                        BorderSide(color: Theme.of(context).primaryColor),
                     borderRadius: BorderRadius.circular(8)),
+                focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Theme.of(context).primaryColor)),
                 labelText: 'Title',
                 focusColor: Colors.amber,
                 labelStyle: TextStyle(color: Colors.black),
@@ -93,6 +97,9 @@ class _NewCategoryState extends State<NewCategory> {
                   border: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.amber),
                       borderRadius: BorderRadius.circular(8)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Theme.of(context).primaryColor)),
                   labelText: 'Weekly Time',
                   focusColor: Colors.amber,
                   labelStyle: TextStyle(color: Colors.black)),

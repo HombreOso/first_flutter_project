@@ -140,7 +140,7 @@ class _NewTransactionState extends State<NewTransaction> {
                       foregroundColor: MaterialStateProperty.all(
                           Theme.of(context).secondaryHeaderColor),
                       backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).primaryColor),
+                          Theme.of(context).canvasColor),
                     ),
                     child: Text(
                       'Choose Date',
@@ -167,7 +167,7 @@ class _NewTransactionState extends State<NewTransaction> {
                   foregroundColor: MaterialStateProperty.all(
                       Theme.of(context).secondaryHeaderColor),
                   backgroundColor:
-                      MaterialStateProperty.all(Theme.of(context).primaryColor),
+                      MaterialStateProperty.all(Theme.of(context).canvasColor),
                   textStyle: MaterialStateProperty.all(Theme.of(context)
                       .textTheme
                       .labelLarge!
@@ -219,7 +219,7 @@ class _NewTransactionState extends State<NewTransaction> {
                                 foregroundColor: MaterialStateProperty.all(
                                     Theme.of(context).secondaryHeaderColor),
                                 backgroundColor: MaterialStateProperty.all(
-                                    Theme.of(context).primaryColor),
+                                    Theme.of(context).canvasColor),
                                 textStyle: MaterialStateProperty.all(
                                     Theme.of(context)
                                         .textTheme

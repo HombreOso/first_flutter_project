@@ -92,7 +92,7 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
                                 padding: EdgeInsets.symmetric(
                                     horizontal: 12, vertical: 0),
                                 decoration: BoxDecoration(
-                                  color: Theme.of(widget.ctx).primaryColor,
+                                  color: Theme.of(widget.ctx).canvasColor,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
                                 child: PopupMenuButton<String>(
@@ -110,7 +110,7 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
                                           value,
                                           style: TextStyle(
                                             color:
-                                                Theme.of(context).primaryColor,
+                                                Theme.of(context).canvasColor,
                                             fontFamily: 'OpenSans',
                                             fontWeight: FontWeight.bold,
                                           ),
