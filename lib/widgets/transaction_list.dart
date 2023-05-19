@@ -140,6 +140,7 @@ class TransactionList extends StatelessWidget {
                                 'Please add categories first',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
+                                  color: Colors.black,
                                 ),
                               ),
                               style: ButtonStyle(

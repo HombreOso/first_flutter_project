@@ -11,13 +11,12 @@ class CategoriesList extends StatelessWidget {
 
   CategoriesList(this.categories, this.deleteCat);
 
-  String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+  final String uid = FirebaseAuth.instance.currentUser!.uid.toString();
   static final CollectionReference categoriesCollectionRef =
       FirebaseFirestore.instance.collection('categories');
 
   void _startUpdateNewCategory(BuildContext ctx, NewCategory newCt) {
     showModalBottomSheet(
-      barrierColor: Colors.black,
       context: ctx,
       builder: (_) {
         return GestureDetector(
@@ -126,7 +125,7 @@ class CategoriesList extends StatelessWidget {
                             shape: BoxShape.circle,
                             gradient: LinearGradient(
                               colors: [
-                                Colors.lightBlueAccent,
+                                Colors.lightGreen,
                                 Colors.lightGreenAccent,
                               ],
                               begin: Alignment.topLeft,
