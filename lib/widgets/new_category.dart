@@ -62,6 +62,7 @@ class _NewCategoryState extends State<NewCategory> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.grey[400],
       elevation: 5,
       child: Container(
         padding: EdgeInsets.all(10),
@@ -69,18 +70,36 @@ class _NewCategoryState extends State<NewCategory> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             TextField(
-              decoration: InputDecoration(labelText: 'Title'),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.amber),
+                    borderRadius: BorderRadius.circular(8)),
+                labelText: 'Title',
+                focusColor: Colors.amber,
+                labelStyle: TextStyle(color: Colors.black),
+              ),
               controller: _titleController,
               onSubmitted: (_) => _usedDefaultDate ? null : _submitData(),
+              cursorColor: Colors.amber,
               // onChanged: (val) {
               //   titleInput = val;
               // },
             ),
+            SizedBox(
+              height: 10,
+            ),
             TextField(
-              decoration: InputDecoration(labelText: 'Weekly Time'),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.amber),
+                      borderRadius: BorderRadius.circular(8)),
+                  labelText: 'Weekly Time',
+                  focusColor: Colors.amber,
+                  labelStyle: TextStyle(color: Colors.black)),
               controller: _amountController,
               keyboardType: TextInputType.number,
               onSubmitted: (_) => _usedDefaultDate ? null : _submitData(),
+              cursorColor: Colors.amber,
               // onChanged: (val) => amountInput = val,
             ),
             SizedBox(
@@ -94,10 +113,8 @@ class _NewCategoryState extends State<NewCategory> {
                 ),
               ),
               style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(
-                      Theme.of(context).secondaryHeaderColor),
-                  backgroundColor:
-                      MaterialStateProperty.all(Theme.of(context).primaryColor),
+                  foregroundColor: MaterialStateProperty.all(Colors.black54),
+                  backgroundColor: MaterialStateProperty.all(Colors.amber),
                   textStyle: MaterialStateProperty.all(Theme.of(context)
                       .textTheme
                       .labelLarge!

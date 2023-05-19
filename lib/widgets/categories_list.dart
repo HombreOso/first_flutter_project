@@ -17,6 +17,7 @@ class CategoriesList extends StatelessWidget {
 
   void _startUpdateNewCategory(BuildContext ctx, NewCategory newCt) {
     showModalBottomSheet(
+      barrierColor: Colors.black,
       context: ctx,
       builder: (_) {
         return GestureDetector(
@@ -110,6 +111,7 @@ class CategoriesList extends StatelessWidget {
                     );
                   },
                   child: Card(
+                    color: Colors.grey[300],
                     elevation: 5,
                     margin: EdgeInsets.symmetric(
                       vertical: 8,
@@ -117,10 +119,11 @@ class CategoriesList extends StatelessWidget {
                     ),
                     child: ListTile(
                       leading: CircleAvatar(
-                        radius: 30,
+                        radius: 33,
                         child: Container(
+                          padding: EdgeInsets.all(15),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
+                            shape: BoxShape.circle,
                             gradient: LinearGradient(
                               colors: [
                                 Colors.lightBlueAccent,
@@ -132,7 +135,7 @@ class CategoriesList extends StatelessWidget {
                           ),
                           child: FittedBox(
                             child: Text(
-                                '\$${categories[index].amount.toStringAsFixed(0)}'),
+                                '${categories[index].amount.toStringAsFixed(0)} h'),
                           ),
                         ),
                         backgroundColor: Theme.of(context).primaryColor,
@@ -143,7 +146,7 @@ class CategoriesList extends StatelessWidget {
                       ),
                       trailing: IconButton(
                         icon: Icon(Icons.edit),
-                        color: Colors.blueAccent,
+                        color: Colors.green,
                         onPressed: () {
                           // Handle edit transaction here
                           print('Edit category ${categories[index].name}');

@@ -11,22 +11,6 @@ import 'screens/forgot_password_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-MaterialColor mainAppColor = const MaterialColor(
-  0xFF89cfbe,
-  <int, Color>{
-    50: Color(0xFF89cfbe),
-    100: Color(0xFF89cfbe),
-    200: Color(0xFF89cfbe),
-    300: Color(0xFF89cfbe),
-    400: Color(0xFF89cfbe),
-    500: Color(0xFF89cfbe),
-    600: Color(0xFF89cfbe),
-    700: Color(0xFF89cfbe),
-    800: Color(0xFF89cfbe),
-    900: Color(0xFF89cfbe),
-  },
-);
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
@@ -64,9 +48,10 @@ class MyApp extends StatelessWidget {
       title: 'Personal Expenses',
       theme: ThemeData(
         useMaterial3: true,
-        primaryColor: Colors.lightBlueAccent,
+        primaryColor: Colors.lightGreenAccent,
         secondaryHeaderColor: Colors.amber,
         unselectedWidgetColor: Colors.red,
+        canvasColor: Colors.grey,
 
         // errorColor: Colors.red,
         fontFamily: 'Quicksand',
@@ -76,7 +61,7 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
               ),
-              labelLarge: TextStyle(color: Colors.white),
+              labelLarge: TextStyle(color: Colors.black),
             ),
         appBarTheme: AppBarTheme(
           titleTextStyle: ThemeData.light().textTheme.titleLarge!.copyWith(

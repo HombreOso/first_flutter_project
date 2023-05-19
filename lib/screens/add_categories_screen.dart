@@ -85,6 +85,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).canvasColor,
+        foregroundColor: Theme.of(context).primaryColor,
         title: Text('Add Categories'),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -141,6 +143,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).canvasColor,
+        foregroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.add),
         onPressed: () async => await numberOfCategories >= 5
             ? ScaffoldMessenger.of(context).showSnackBar(

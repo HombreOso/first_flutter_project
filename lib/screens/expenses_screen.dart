@@ -6,7 +6,6 @@ import '../widgets/transaction_list.dart';
 import '../widgets/chart.dart';
 import '../models/transaction.dart';
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
@@ -153,6 +152,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.grey,
+        foregroundColor: Theme.of(context).primaryColor,
         title: Text(
           'Personal Expenses',
         ),
@@ -268,6 +269,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
+        focusColor: Theme.of(context).canvasColor,
+        backgroundColor: Theme.of(context).canvasColor,
+        foregroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
       ),
