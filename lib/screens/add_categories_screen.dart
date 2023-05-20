@@ -202,7 +202,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                             showChartValuesOutside: true,
                             decimalPlaces: 1,
                           ),
-                          totalValue: weekTotalDuration,
+                          //totalValue: weekTotalDuration,
                           baseChartColor: Colors.grey,
                           // gradientList: ---To add gradient colors---
                           // emptyColorGradient: ---Empty Color gradient---

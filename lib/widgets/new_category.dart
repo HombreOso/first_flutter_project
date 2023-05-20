@@ -53,9 +53,9 @@ class _NewCategoryState extends State<NewCategory> {
     if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
-    if ((await namesOfCategories).contains(enteredTitle)) {
-      enteredTitle += "_";
-    }
+    // if ((await namesOfCategories).contains(enteredTitle)) {
+    //   enteredTitle += "_";
+    // }
     widget.addCt(enteredTitle, enteredAmount, "", widget.id);
 
     Navigator.of(context).pop();
