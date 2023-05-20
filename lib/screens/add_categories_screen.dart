@@ -215,7 +215,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           (tx) => tx.uid == uid,
                         )
                         .toList(),
-                    _deleteCategory),
+                    _deleteCategory,
+                    context),
                 // TextButton(
                 //   onPressed: () {
                 //     // Add the new category and close the dialog
@@ -253,7 +254,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: NewCategory(_addNewCategory, "", "", "", ""),
+          child: NewCategory(_addNewCategory, "", "", "", "", ctx),
           behavior: HitTestBehavior.opaque,
         );
       },

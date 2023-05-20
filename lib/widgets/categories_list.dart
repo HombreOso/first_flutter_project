@@ -5,11 +5,39 @@ import 'package:flutter_complete_guide/widgets/new_category.dart';
 
 import '../models/category.dart';
 
+Future<void> _dialogBuilder(BuildContext context) {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Total Weekly Hours'),
+        content: const Text(
+          "Total weekly hours should not exceed 112h",
+        ),
+        actions: <Widget>[
+          TextButton(
+            style: TextButton.styleFrom(
+              textStyle: Theme.of(context).textTheme.labelLarge,
+            ),
+            child: const Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 class CategoriesList extends StatelessWidget {
   final List<Category> categories;
   final Function deleteCat;
+  final BuildContext parentContext;
 
-  CategoriesList(this.categories, this.deleteCat);
+  final double weekTotalDuration = 112;
+
+  CategoriesList(this.categories, this.deleteCat, this.parentContext);
 
   final String uid = FirebaseAuth.instance.currentUser!.uid.toString();
   static final CollectionReference categoriesCollectionRef =
@@ -28,11 +56,27 @@ class CategoriesList extends StatelessWidget {
     );
   }
 
+  Future<double> get totalCategoriesDuration async {
+    final snapshot =
+        await FirebaseFirestore.instance.collection('categories').get();
+    final List<Category> loadedCategories = snapshot.docs
+        .map((doc) => Category.fromMap(doc.data()))
+        .toList()
+        .where((cat) => cat.uid == uid)
+        .toList();
+    double totalDuration = 0;
+    loadedCategories.forEach((element) {
+      totalDuration = totalDuration + element.amount;
+    });
+    return totalDuration;
+  }
+
   Future<void> _updateNewCategory(
     String ctName,
     double ctAmount,
     String nameCurrentCt,
     String id,
+    BuildContext ctx,
   ) async {
     print("Current name ct: $nameCurrentCt");
     final newCat = Category(
@@ -55,11 +99,15 @@ class CategoriesList extends StatelessWidget {
         .limit(1)
         .get()
         .then((QuerySnapshot snapshot) => snapshot.docs[0].reference);
-    uptodatedDoc.update({
-      'uid': uid,
-      'name': newCat.name,
-      'amount': newCat.amount,
-    });
+    if (await (totalCategoriesDuration) + newCat.amount <= weekTotalDuration) {
+      uptodatedDoc.update({
+        'uid': uid,
+        'name': newCat.name,
+        'amount': newCat.amount,
+      });
+    } else {
+      _dialogBuilder(ctx);
+    }
   }
 
   @override
@@ -154,12 +202,12 @@ class CategoriesList extends StatelessWidget {
                           _startUpdateNewCategory(
                             ctx,
                             NewCategory(
-                              _updateNewCategory,
-                              categories[index].name,
-                              categories[index].amount.toString(),
-                              categories[index].name,
-                              categories[index].id,
-                            ),
+                                _updateNewCategory,
+                                categories[index].name,
+                                categories[index].amount.toString(),
+                                categories[index].name,
+                                categories[index].id,
+                                parentContext),
                           );
                           //return NewTransaction(addTx, initialAmountText, initialTitleText)
                         },
