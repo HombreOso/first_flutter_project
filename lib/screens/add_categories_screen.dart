@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 import '../widgets/new_category.dart';
 import '../models/category.dart';
@@ -112,6 +113,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
               loadedCategories.add(category);
             },
           );
+          Map<String, double> loadedCategoriesDurationMap = {};
+          loadedCategories.where((element) => element.uid == uid).forEach(
+              (cat) => loadedCategoriesDurationMap[cat.name] = cat.amount);
 
           // } catch (e) {
           //   // Handle errors
@@ -121,6 +125,38 @@ class _CategoryScreenState extends State<CategoryScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+                !loadedCategories.isEmpty
+                    ? PieChart(
+                        dataMap: loadedCategoriesDurationMap,
+                        animationDuration: Duration(milliseconds: 800),
+                        chartLegendSpacing: 32,
+                        chartRadius: MediaQuery.of(context).size.width / 3.2,
+                        initialAngleInDegree: 0,
+                        chartType: ChartType.ring,
+                        ringStrokeWidth: 32,
+                        centerText: "Week",
+                        legendOptions: LegendOptions(
+                          showLegendsInRow: false,
+                          legendPosition: LegendPosition.right,
+                          showLegends: true,
+                          legendShape: BoxShape.circle,
+                          legendTextStyle: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        chartValuesOptions: ChartValuesOptions(
+                          showChartValueBackground: true,
+                          showChartValues: true,
+                          showChartValuesInPercentage: true,
+                          showChartValuesOutside: true,
+                          decimalPlaces: 1,
+                        ),
+                        totalValue: 112,
+                        baseChartColor: Colors.grey,
+                        // gradientList: ---To add gradient colors---
+                        // emptyColorGradient: ---Empty Color gradient---
+                      )
+                    : SizedBox(height: 1),
                 CategoriesList(
                     loadedCategories
                         .where(
@@ -146,7 +182,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         backgroundColor: Theme.of(context).canvasColor,
         foregroundColor: Theme.of(context).primaryColor,
         child: Icon(Icons.add),
-        onPressed: () async => await numberOfCategories >= 5
+        onPressed: () async => await numberOfCategories >= 14
             ? ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text("5 categories are maximal"),
