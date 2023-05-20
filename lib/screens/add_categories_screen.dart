@@ -16,6 +16,18 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   List<Category> categories = [];
   final double weekTotalDuration = 112;
+  final List<Color> colorsList = [
+    Colors.redAccent,
+    Colors.orange,
+    Colors.amberAccent,
+    Colors.greenAccent,
+    Colors.lightBlueAccent,
+    Colors.blueAccent,
+    Colors.purpleAccent,
+    Colors.blueGrey,
+    Colors.deepPurple,
+    Colors.brown
+  ];
   static final CollectionReference categoriesCollectionRef =
       FirebaseFirestore.instance.collection('categories');
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
@@ -157,6 +169,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         chartRadius: MediaQuery.of(context).size.width / 3.2,
                         initialAngleInDegree: 0,
                         chartType: ChartType.ring,
+                        colorList: colorsList,
                         ringStrokeWidth: 32,
                         centerText: "Week",
                         legendOptions: LegendOptions(
