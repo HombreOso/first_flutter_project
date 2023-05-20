@@ -64,8 +64,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       id: categoryIdAsCurrentDateTime,
     );
     print("totalDuration ${await totalCategoriesDuration}");
-    if (await (totalCategoriesDuration) + newCt.amount as double >
-        weekTotalDuration) {
+    if (await (totalCategoriesDuration) + newCt.amount > weekTotalDuration) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Weekly time should not exceed 112 hours"),
