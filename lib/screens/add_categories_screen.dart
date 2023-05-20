@@ -160,46 +160,53 @@ class _CategoryScreenState extends State<CategoryScreen> {
           Map<String, double> loadedCategoriesDurationMap = {};
           loadedCategories.where((element) => element.uid == uid).forEach(
               (cat) => loadedCategoriesDurationMap[cat.name] = cat.amount);
-
           // } catch (e) {
           //   // Handle errors
           //   print('No docs in collection categories: $e');
           // }
+          double totalDuration = 0;
+          loadedCategories
+              .where((element) => element.uid == uid)
+              .forEach((cat) => totalDuration += cat.amount);
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 !loadedCategories.isEmpty
-                    ? PieChart(
-                        dataMap: loadedCategoriesDurationMap,
-                        animationDuration: Duration(milliseconds: 800),
-                        chartLegendSpacing: 32,
-                        chartRadius: MediaQuery.of(context).size.width / 3.2,
-                        initialAngleInDegree: 0,
-                        chartType: ChartType.ring,
-                        colorList: colorsList,
-                        ringStrokeWidth: 32,
-                        centerText: "Week",
-                        legendOptions: LegendOptions(
-                          showLegendsInRow: false,
-                          legendPosition: LegendPosition.right,
-                          showLegends: true,
-                          legendShape: BoxShape.circle,
-                          legendTextStyle: TextStyle(
-                            fontWeight: FontWeight.bold,
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                        child: PieChart(
+                          dataMap: loadedCategoriesDurationMap,
+                          animationDuration: Duration(milliseconds: 800),
+                          chartLegendSpacing: 32,
+                          chartRadius: MediaQuery.of(context).size.width / 3.2,
+                          initialAngleInDegree: 0,
+                          chartType: ChartType.ring,
+                          colorList: colorsList,
+                          ringStrokeWidth: 32,
+                          centerText:
+                              "Week \n ${totalDuration.toStringAsFixed(0)}h",
+                          legendOptions: LegendOptions(
+                            showLegendsInRow: false,
+                            legendPosition: LegendPosition.right,
+                            showLegends: true,
+                            legendShape: BoxShape.circle,
+                            legendTextStyle: TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
+                          chartValuesOptions: ChartValuesOptions(
+                            showChartValueBackground: true,
+                            showChartValues: true,
+                            showChartValuesInPercentage: true,
+                            showChartValuesOutside: true,
+                            decimalPlaces: 1,
+                          ),
+                          totalValue: weekTotalDuration,
+                          baseChartColor: Colors.grey,
+                          // gradientList: ---To add gradient colors---
+                          // emptyColorGradient: ---Empty Color gradient---
                         ),
-                        chartValuesOptions: ChartValuesOptions(
-                          showChartValueBackground: true,
-                          showChartValues: true,
-                          showChartValuesInPercentage: true,
-                          showChartValuesOutside: true,
-                          decimalPlaces: 1,
-                        ),
-                        totalValue: weekTotalDuration,
-                        baseChartColor: Colors.grey,
-                        // gradientList: ---To add gradient colors---
-                        // emptyColorGradient: ---Empty Color gradient---
                       )
                     : SizedBox(height: 1),
                 CategoriesList(
