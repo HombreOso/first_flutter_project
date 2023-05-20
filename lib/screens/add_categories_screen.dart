@@ -174,16 +174,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
               children: <Widget>[
                 !loadedCategories.isEmpty
                     ? Padding(
-                        padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                        padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
                         child: PieChart(
                           dataMap: loadedCategoriesDurationMap,
-                          animationDuration: Duration(milliseconds: 800),
+                          animationDuration: Duration(seconds: 0),
                           chartLegendSpacing: 32,
                           chartRadius: MediaQuery.of(context).size.width / 3.2,
                           initialAngleInDegree: 0,
                           chartType: ChartType.ring,
                           colorList: colorsList,
-                          ringStrokeWidth: 32,
+                          ringStrokeWidth: 16,
                           centerText:
                               "Week \n ${totalDuration.toStringAsFixed(0)}h",
                           legendOptions: LegendOptions(
@@ -230,6 +230,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
           );
         },
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).canvasColor,
         foregroundColor: Theme.of(context).primaryColor,
