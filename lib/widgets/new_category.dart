@@ -9,8 +9,10 @@ class NewCategory extends StatefulWidget {
   final String nameCt;
   final String amountCt;
   final String nameCurrentCt;
+  final String id;
 
-  NewCategory(this.addCt, this.nameCt, this.amountCt, this.nameCurrentCt);
+  NewCategory(
+      this.addCt, this.nameCt, this.amountCt, this.nameCurrentCt, this.id);
 
   @override
   _NewCategoryState createState() => _NewCategoryState();
@@ -54,7 +56,7 @@ class _NewCategoryState extends State<NewCategory> {
     if ((await namesOfCategories).contains(enteredTitle)) {
       enteredTitle += "_";
     }
-    widget.addCt(enteredTitle, enteredAmount, "");
+    widget.addCt(enteredTitle, enteredAmount, "", widget.id);
 
     Navigator.of(context).pop();
   }

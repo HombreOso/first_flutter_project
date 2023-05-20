@@ -48,6 +48,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       name: ctName,
       amount: ctAmount,
       uid: uid,
+      id: categoryIdAsCurrentDateTime,
     );
     setState(() {
       categories.add(newCt);
@@ -200,7 +201,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       builder: (_) {
         return GestureDetector(
           onTap: () {},
-          child: NewCategory(_addNewCategory, "", "", ""),
+          child: NewCategory(_addNewCategory, "", "", "", ""),
           behavior: HitTestBehavior.opaque,
         );
       },

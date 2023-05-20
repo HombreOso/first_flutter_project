@@ -32,12 +32,14 @@ class CategoriesList extends StatelessWidget {
     String ctName,
     double ctAmount,
     String nameCurrentCt,
+    String id,
   ) async {
     print("Current name ct: $nameCurrentCt");
     final newCat = Category(
       name: ctName,
       amount: ctAmount,
       uid: uid,
+      id: id,
     );
 
     // Write the transaction to Firebase
@@ -47,8 +49,8 @@ class CategoriesList extends StatelessWidget {
           isEqualTo: uid,
         )
         .where(
-          'name',
-          isEqualTo: ctName,
+          'id',
+          isEqualTo: id,
         )
         .limit(1)
         .get()
@@ -156,6 +158,7 @@ class CategoriesList extends StatelessWidget {
                               categories[index].name,
                               categories[index].amount.toString(),
                               categories[index].name,
+                              categories[index].id,
                             ),
                           );
                           //return NewTransaction(addTx, initialAmountText, initialTitleText)
