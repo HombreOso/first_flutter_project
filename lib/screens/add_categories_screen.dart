@@ -25,6 +25,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
     Colors.blueAccent,
     Colors.purpleAccent,
     Colors.blueGrey,
+    Colors.red,
+    Colors.orangeAccent,
+    Colors.amber,
+    Colors.green,
+    Colors.lightBlue,
+    Colors.blue,
+    Colors.purple,
+    Colors.blueGrey,
     Colors.deepPurple,
     Colors.brown
   ];
