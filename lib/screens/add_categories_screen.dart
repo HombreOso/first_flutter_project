@@ -15,6 +15,7 @@ class CategoryScreen extends StatefulWidget {
 
 class _CategoryScreenState extends State<CategoryScreen> {
   List<Category> categories = [];
+  final double weekTotalDuration = 112;
   static final CollectionReference categoriesCollectionRef =
       FirebaseFirestore.instance.collection('categories');
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
@@ -38,11 +39,23 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return await loadedCategories.length;
   }
 
+  Future<double> get totalCategoriesDuration async {
+    final snapshot =
+        await FirebaseFirestore.instance.collection('categories').get();
+    final List<Category> loadedCategories = snapshot.docs
+        .map((doc) => Category.fromMap(doc.data()))
+        .toList()
+        .where((cat) => cat.uid == uid)
+        .toList();
+    double totalDuration = 0;
+    loadedCategories.forEach((element) {
+      totalDuration = totalDuration + element.amount;
+    });
+    return totalDuration;
+  }
+
   Future<void> _addNewCategory(
-    String ctName,
-    double ctAmount,
-    String nameCurrentCt,
-  ) async {
+      String ctName, double ctAmount, String nameCurrentCt, String id) async {
     final String categoryIdAsCurrentDateTime = DateTime.now().toString();
     final newCt = Category(
       name: ctName,
@@ -50,16 +63,27 @@ class _CategoryScreenState extends State<CategoryScreen> {
       uid: uid,
       id: categoryIdAsCurrentDateTime,
     );
-    setState(() {
-      categories.add(newCt);
-    });
-    // Write the transaction to Firebase
-    await categoriesCollectionRef.add({
-      'uid': uid,
-      'id': categoryIdAsCurrentDateTime,
-      'name': newCt.name,
-      'amount': newCt.amount,
-    });
+    print("totalDuration ${await totalCategoriesDuration}");
+    if (await (totalCategoriesDuration) + newCt.amount as double >
+        weekTotalDuration) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Weekly time should not exceed 112 hours"),
+          backgroundColor: Theme.of(context).colorScheme.error,
+        ),
+      );
+    } else {
+      setState(() {
+        categories.add(newCt);
+      });
+      // Write the transaction to Firebase
+      await categoriesCollectionRef.add({
+        'uid': uid,
+        'id': categoryIdAsCurrentDateTime,
+        'name': newCt.name,
+        'amount': newCt.amount,
+      });
+    }
   }
 
   void _deleteCategory(String name, String uid) async {
@@ -152,7 +176,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           showChartValuesOutside: true,
                           decimalPlaces: 1,
                         ),
-                        totalValue: 112,
+                        totalValue: weekTotalDuration,
                         baseChartColor: Colors.grey,
                         // gradientList: ---To add gradient colors---
                         // emptyColorGradient: ---Empty Color gradient---
@@ -186,7 +210,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         onPressed: () async => await numberOfCategories >= 14
             ? ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text("5 categories are maximal"),
+                  content: Text("14 categories are maximal"),
                   backgroundColor: Theme.of(context).colorScheme.error,
                 ),
               )
