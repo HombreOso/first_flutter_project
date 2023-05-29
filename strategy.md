@@ -28,7 +28,7 @@ Let us begin
 First steps
 ===============================
 
-1. week plan (working days, weekend: what about shift irregularly scheduled working times?)
+1. Week plan (working days, weekend: what about shift irregularly scheduled working times?)
 
 Consider scanning and importing PDF/ Excel/ Photos with working times: ML/ Computer Vision
 
@@ -43,7 +43,15 @@ Commute +1:30h before and after
 Is it possible to learn during the commute?
 If yes, which category do you want to learn, and how much time do you commute without changes?
 
+As of now, do the same schedule for each working day.
+
 2. Model classes
 
-Category: id, name, weekly_time, description, total_time_spent: {"Sunday_of_each_week": "time_spent_per_week"}
+Goal: id, name, deadline, strategy_type, priority, description
+
+Category: id, name, weekly_time, description, total_time_spent: {"Sunday_of_each_week": "time_spent_per_week"}, overall_total_time
+
+ToDo: id, name, time_planned, time_spent, is_done, priority, category_id
+
+ScheduledTask: id, name, start_datetime_planned, end_datetime_planned, start_datetime_as_is, end_datetime_as_is, is_canceled, category_id
 
