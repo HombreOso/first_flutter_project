@@ -46,10 +46,10 @@ class Goal {
     final data = snapshot.data();
     return Goal(
       name: data!['name'] as String,
-      deadline: data!['deadline'] as String,
-      strategy_type_id: data!['strategy_type_id'] as String,
-      priority: data!['priority'] as int,
-      decription: data!['decription'] as String,
+      deadline: data['deadline'] as String,
+      strategy_type_id: data['strategy_type_id'] as String,
+      priority: data['priority'] as int,
+      decription: data['decription'] as String,
       uid: data['uid'] as String,
       id: data['id'] as String,
     );
