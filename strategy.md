@@ -55,3 +55,5 @@ ToDo: id, name, time_planned, time_spent, is_done, priority, category_id
 
 ScheduledTask: id, name, start_datetime_planned, end_datetime_planned, start_datetime_as_is, end_datetime_as_is, is_canceled, category_id
 
+3. Consider Notion API possibilities
+
