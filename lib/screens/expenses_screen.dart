@@ -210,12 +210,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 value: 'categories',
               ),
+              DropdownMenuItem(
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.calendar_today,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      SizedBox(width: 8),
+                      Text('Calendar'),
+                    ],
+                  ),
+                ),
+                value: 'calendar',
+              ),
             ],
             onChanged: (itemIdentifier) {
               if (itemIdentifier == 'logout') {
                 FirebaseAuth.instance.signOut();
               } else if (itemIdentifier == 'categories') {
                 Navigator.pushNamed(context, '/categories');
+              } else if (itemIdentifier == 'calendar') {
+                Navigator.pushNamed(context, '/calendar');
               }
             },
           ),

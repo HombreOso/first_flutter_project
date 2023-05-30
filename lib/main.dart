@@ -7,6 +7,7 @@ import '../screens/expenses_screen.dart';
 
 import 'screens/add_categories_screen.dart';
 import 'screens/forgot_password_screen.dart';
+import 'screens/calendar_view.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -80,6 +81,7 @@ class MyApp extends StatelessWidget {
         '/auth': (context) => AuthPage(),
         '/reset_password': (context) => ResetPasswordScreen(),
         '/confirm_email': (context) => EmailVerificationScreen(),
+        '/calendar': (context) => CalendarScreen(),
       },
       home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),
