@@ -27,14 +27,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SfCalendar(
-      view: CalendarView.month,
-      dataSource: MeetingDataSource(_getDataSource()),
-      // by default the month appointment display mode set as Indicator, we can
-      // change the display mode as appointment using the appointment display
-      // mode property
-      monthViewSettings: const MonthViewSettings(
-          appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+        body: Padding(
+      padding: const EdgeInsets.only(top: 30, bottom: 15),
+      child: SfCalendar(
+        view: CalendarView.week,
+        dataSource: MeetingDataSource(_getDataSource()),
+        // by default the month appointment display mode set as Indicator, we can
+        // change the display mode as appointment using the appointment display
+        // mode property
+        monthViewSettings: const MonthViewSettings(
+            appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+      ),
     ));
   }
 
@@ -47,6 +50,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
         'Conference', startTime, endTime, const Color(0xFF0F8644), false));
     return meetings;
   }
+
+  void _addScheduledTask() {}
 }
 
 /// An object to set the appointment collection data source to calendar, which
