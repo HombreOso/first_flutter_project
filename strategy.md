@@ -64,8 +64,13 @@ ScheduledTask: id, name, start_datetime_planned, end_datetime_planned, start_dat
     - By tapping on speicfic daytime in the day view
     - By tapping on the floating button "+"
 
-- In all these cases, a screen with task details should appear
-
+- In all these cases, a screen with task details should appear. Fields to fill out:
+    - Start daytime
+    - End daytime (consider transition to the next day, i.e. tasks over midnight), i.e. deadline
+    - Task name
+    - Category name (select from categories collection) + enable to add a new category
+    - Priority (setup enum of five priority stages)
+    
 - A synchronisation with google or microsoft (and also other) calendars should be considered too
 
 
