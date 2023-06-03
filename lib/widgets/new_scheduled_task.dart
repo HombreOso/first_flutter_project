@@ -5,14 +5,14 @@ import 'package:intl/intl.dart';
 
 import 'dropdownExpenseCategories.dart';
 
-class NewTransaction extends StatefulWidget {
+class NewScheduledTask extends StatefulWidget {
   final Function addTx;
   final String initialAmountText;
   final String initialTitleText;
   final String txDateIdAsString;
   final DateTime txDate;
 
-  NewTransaction(
+  NewScheduledTask(
     this.addTx,
     this.initialAmountText,
     this.initialTitleText,
@@ -21,10 +21,10 @@ class NewTransaction extends StatefulWidget {
   );
 
   @override
-  _NewTransactionState createState() => _NewTransactionState();
+  _NewScheduledTaskState createState() => _NewScheduledTaskState();
 }
 
-class _NewTransactionState extends State<NewTransaction> {
+class _NewScheduledTaskState extends State<NewScheduledTask> {
   var _amountController;
   var _titleController;
   @override
