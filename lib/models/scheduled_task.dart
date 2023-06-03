@@ -10,7 +10,7 @@ class ScheduledTask {
   var is_canceled;
   var priority;
   var decription;
-  var uid;
+  var tskUid;
   var id;
 
   ScheduledTask(
@@ -23,7 +23,7 @@ class ScheduledTask {
       required this.is_canceled,
       required this.priority,
       required this.decription,
-      required this.uid,
+      required this.tskUid,
       required this.id});
 
   factory ScheduledTask.fromMap(Map<String, dynamic> map) {
@@ -37,7 +37,7 @@ class ScheduledTask {
       is_canceled: map['is_canceled'],
       priority: map['priority'],
       decription: map['decription'],
-      uid: map['uid'],
+      tskUid: map['uid'],
       id: map['id'],
     );
   }
@@ -53,7 +53,7 @@ class ScheduledTask {
       'is_canceled': is_canceled,
       'priority': priority,
       'decription': decription,
-      'uid': uid,
+      'uid': tskUid,
       'id': id,
     };
   }
@@ -63,15 +63,15 @@ class ScheduledTask {
     final data = snapshot.data();
     return ScheduledTask(
       name: data!['name'] as String,
-      deadline: data['deadline'] as String,
-      start_datetime_planned: data['start_datetime_planned'] as String,
-      end_datetime_planned: data['end_datetime_planned'] as String,
-      start_datetime_as_is: data['start_datetime_as_is'] as String,
-      end_datetime_as_is: data['end_datetime_as_is'] as String,
+      deadline: data['deadline'] as DateTime,
+      start_datetime_planned: data['start_datetime_planned'] as DateTime,
+      end_datetime_planned: data['end_datetime_planned'] as DateTime,
+      start_datetime_as_is: data['start_datetime_as_is'] as DateTime,
+      end_datetime_as_is: data['end_datetime_as_is'] as DateTime,
       is_canceled: data['is_canceled'] as bool,
       priority: data['priority'] as String,
       decription: data['decription'] as String,
-      uid: data['uid'] as String,
+      tskUid: data['uid'] as String,
       id: data['id'] as String,
     );
   }

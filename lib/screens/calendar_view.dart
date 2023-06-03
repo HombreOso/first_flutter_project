@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'package:flutter/material.dart';
@@ -8,10 +9,12 @@ import 'package:flutter_complete_guide/screens/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../models/scheduled_task.dart';
 import '../screens/expenses_screen.dart';
 
 import '../screens/add_categories_screen.dart';
 import '../screens/forgot_password_screen.dart';
+import '../models/priority_enum.dart';
 
 /// The hove page which hosts the calendar
 class CalendarScreen extends StatefulWidget {
@@ -39,6 +42,59 @@ class _CalendarScreenState extends State<CalendarScreen> {
             appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
       ),
     ));
+  }
+
+  List<ScheduledTask> _userScheduledTasks = [];
+
+  static final CollectionReference tasksCollectionRef =
+      FirebaseFirestore.instance.collection('tasks');
+
+  String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+
+  Future<void> _addNewScheduledTask(
+    String tskName,
+    DateTime tskDeadline,
+    DateTime tskStartDatetimePlanned,
+    DateTime tskEndDatetimePlanned,
+    DateTime tskStartDatetimeAsIs,
+    DateTime tskEndDatetimeAsIs,
+    bool tskIsCanceled,
+    Priority tskPriority,
+    String tskDescription,
+    String tskUid,
+    String tskId,
+  ) async {
+    final String transactionIdAsCurrentDateTime = DateTime.now().toString();
+    final newTx = ScheduledTask(
+      name: tskName,
+      deadline: tskDeadline,
+      start_datetime_planned: tskStartDatetimePlanned,
+      end_datetime_planned: tskEndDatetimePlanned,
+      start_datetime_as_is: tskStartDatetimeAsIs,
+      end_datetime_as_is: tskEndDatetimeAsIs,
+      is_canceled: tskIsCanceled,
+      priority: tskPriority,
+      decription: tskDescription,
+      tskUid: tskUid,
+      id: tskId,
+    );
+    setState(() {
+      _userScheduledTasks.add(newTx);
+    });
+    // Write the transaction to Firebase
+    await tasksCollectionRef.add({
+      'name': tskName,
+      'deadline': tskDeadline,
+      'start_datetime_planned': tskStartDatetimePlanned,
+      'end_datetime_planned': tskEndDatetimePlanned,
+      'start_datetime_as_is': tskStartDatetimeAsIs,
+      'end_datetime_as_is': tskEndDatetimeAsIs,
+      'is_canceled': tskIsCanceled,
+      'priority': tskPriority,
+      'decription': tskDescription,
+      'uid': tskUid,
+      'id': tskId,
+    });
   }
 
   List<Meeting> _getDataSource() {
