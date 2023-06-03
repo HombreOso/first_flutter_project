@@ -75,7 +75,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       is_canceled: tskIsCanceled,
       priority: tskPriority,
       decription: tskDescription,
-      tskUid: tskUid,
+      uid: uid,
       id: tskId,
     );
     setState(() {
@@ -92,7 +92,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       'is_canceled': tskIsCanceled,
       'priority': tskPriority,
       'decription': tskDescription,
-      'uid': tskUid,
+      'uid': uid,
       'id': tskId,
     });
   }

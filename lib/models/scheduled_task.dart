@@ -10,7 +10,7 @@ class ScheduledTask {
   var is_canceled;
   var priority;
   var decription;
-  var tskUid;
+  var uid;
   var id;
 
   ScheduledTask(
@@ -23,7 +23,7 @@ class ScheduledTask {
       required this.is_canceled,
       required this.priority,
       required this.decription,
-      required this.tskUid,
+      required this.uid,
       required this.id});
 
   factory ScheduledTask.fromMap(Map<String, dynamic> map) {
@@ -37,7 +37,7 @@ class ScheduledTask {
       is_canceled: map['is_canceled'],
       priority: map['priority'],
       decription: map['decription'],
-      tskUid: map['uid'],
+      uid: map['uid'],
       id: map['id'],
     );
   }
@@ -53,7 +53,7 @@ class ScheduledTask {
       'is_canceled': is_canceled,
       'priority': priority,
       'decription': decription,
-      'uid': tskUid,
+      'uid': uid,
       'id': id,
     };
   }
@@ -71,7 +71,7 @@ class ScheduledTask {
       is_canceled: data['is_canceled'] as bool,
       priority: data['priority'] as String,
       decription: data['decription'] as String,
-      tskUid: data['uid'] as String,
+      uid: data['uid'] as String,
       id: data['id'] as String,
     );
   }
