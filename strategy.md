@@ -59,7 +59,7 @@ ScheduledTask: id, name, start_datetime_planned, end_datetime_planned, start_dat
 
 4. Calendar scheduled tasks
 
-- There should be multpile possibilities to schedule a task:
+- There should be multiple possibilities to start scheduling a task:
     - By tapping on specific day in the month view
     - By tapping on speicfic daytime in the day view
     - By tapping on the floating button "+"
