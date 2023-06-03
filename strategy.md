@@ -57,3 +57,15 @@ ScheduledTask: id, name, start_datetime_planned, end_datetime_planned, start_dat
 
 3. Consider Notion API possibilities
 
+4. Calendar scheduled tasks
+
+- There should be multpile possibilities to schedule a task:
+    - By tapping on specific day in the month view
+    - By tapping on speicfic daytime in the day view
+    - By tapping on the floating button "+"
+
+- In all these cases, a screen with task details should appear
+
+- A synchronisation with google or microsoft (and also other) calendars should be considered too
+
+
