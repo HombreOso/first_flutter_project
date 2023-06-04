@@ -76,8 +76,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
           foregroundColor: Theme.of(context).primaryColor,
           child: Icon(Icons.add),
           onPressed: () => time_picker_func(
-                context,
                 TimeOfDay.now(),
+                TimePickerEntryMode.dial,
                 Orientation.portrait,
                 MaterialTapTargetSize.padded,
                 context,
