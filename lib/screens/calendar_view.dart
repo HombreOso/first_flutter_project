@@ -20,21 +20,69 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
+  Future<TimeOfDay?> time_picker_func(
+      selectedTime, entryMode, orientation, tapTargetSize, ctx) async {
+    TimeOfDay? time = await showTimePicker(
+      context: ctx,
+      initialTime: selectedTime ?? TimeOfDay.now(),
+      initialEntryMode: entryMode,
+      orientation: orientation,
+      builder: (BuildContext context, Widget? child) {
+        // We just wrap these environmental changes around the
+        // child in this builder so that we can apply the
+        // options selected above. In regular usage, this is
+        // rarely necessary, because the default values are
+        // usually used as-is.
+        return Theme(
+          data: Theme.of(context).copyWith(
+            materialTapTargetSize: tapTargetSize,
+          ),
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                alwaysUse24HourFormat: true,
+              ),
+              child: child!,
+            ),
+          ),
+        );
+      },
+    );
+    setState(() {
+      selectedTime = time;
+    });
+    return time;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.only(top: 30, bottom: 15),
-      child: SfCalendar(
-        view: CalendarView.week,
-        dataSource: MeetingDataSource(_getDataSource()),
-        // by default the month appointment display mode set as Indicator, we can
-        // change the display mode as appointment using the appointment display
-        // mode property
-        monthViewSettings: const MonthViewSettings(
-            appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+      body: Padding(
+        padding: const EdgeInsets.only(top: 30, bottom: 15),
+        child: SfCalendar(
+          view: CalendarView.week,
+          dataSource: MeetingDataSource(_getDataSource()),
+          // by default the month appointment display mode set as Indicator, we can
+          // change the display mode as appointment using the appointment display
+          // mode property
+          monthViewSettings: const MonthViewSettings(
+              appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+        ),
       ),
-    ));
+      floatingActionButton: FloatingActionButton(
+          focusColor: Theme.of(context).canvasColor,
+          backgroundColor: Theme.of(context).canvasColor,
+          foregroundColor: Theme.of(context).primaryColor,
+          child: Icon(Icons.add),
+          onPressed: () => time_picker_func(
+                context,
+                TimeOfDay.now(),
+                Orientation.portrait,
+                MaterialTapTargetSize.padded,
+                context,
+              )),
+    );
   }
 
   List<ScheduledTask> _userScheduledTasks = [];
