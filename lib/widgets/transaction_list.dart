@@ -17,7 +17,7 @@ class TransactionList extends StatelessWidget {
 
   static final CollectionReference transactionCollectionRef =
       FirebaseFirestore.instance.collection('transactions');
-  String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+  final String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
   void _startUpdateNewTransaction(BuildContext ctx, NewTransaction newTx) {
     showModalBottomSheet(

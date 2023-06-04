@@ -130,9 +130,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      _selectedDate == null
-                          ? 'No Date Chosen!'
-                          : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
+                      'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
                     ),
                   ),
                   TextButton(

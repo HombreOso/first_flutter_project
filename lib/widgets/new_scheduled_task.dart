@@ -130,9 +130,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                 children: <Widget>[
                   Expanded(
                     child: Text(
-                      _selectedDate == null
-                          ? 'No Date Chosen!'
-                          : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
+                      'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',
                     ),
                   ),
                   TextButton(

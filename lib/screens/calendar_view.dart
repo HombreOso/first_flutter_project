@@ -2,18 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/screens/auth_screen.dart';
-import 'package:flutter_complete_guide/screens/confirm_email_screen.dart';
-import 'package:flutter_complete_guide/screens/splash_screen.dart';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../models/scheduled_task.dart';
-import '../screens/expenses_screen.dart';
 
-import '../screens/add_categories_screen.dart';
-import '../screens/forgot_password_screen.dart';
 import '../models/priority_enum.dart';
 
 /// The hove page which hosts the calendar

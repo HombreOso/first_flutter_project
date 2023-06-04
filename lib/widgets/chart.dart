@@ -12,10 +12,10 @@ class Chart extends StatelessWidget {
 
   Chart(this.currentMonthTransactions);
 
-  List<Category> categories = [];
+  final List<Category> categories = [];
   static final CollectionReference categoriesCollectionRef =
       FirebaseFirestore.instance.collection('categories');
-  String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+  final String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
   List<Map<String, Object>> get groupedTransactionValues {
     return List.generate(7, (index) {
