@@ -68,6 +68,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           // mode property
           monthViewSettings: const MonthViewSettings(
               appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
+          onTap: calendarTapped,
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -91,6 +92,73 @@ class _CalendarScreenState extends State<CalendarScreen> {
       FirebaseFirestore.instance.collection('tasks');
 
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+
+  // initial values for CalendarTapDetails
+  String? _subjectText = '',
+      _startTimeText = '',
+      _endTimeText = '',
+      _dateText = '',
+      _timeDetails = '';
+
+  void calendarTapped(CalendarTapDetails details) {
+    if (details.targetElement == CalendarElement.appointment ||
+        details.targetElement == CalendarElement.agenda) {
+      final Meeting appointmentDetails = details.appointments![0];
+      _subjectText = appointmentDetails.eventName;
+      _dateText = 'lala';
+      _startTimeText = 'lala';
+      _endTimeText = 'lala';
+      _timeDetails = '$_startTimeText - $_endTimeText';
+    } else if (details.targetElement == CalendarElement.calendarCell) {
+      _subjectText = "You have tapped cell";
+      _dateText = 'lala';
+      _timeDetails = '';
+    }
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Container(child: new Text('$_subjectText')),
+            content: Container(
+              height: 80,
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        '$_dateText',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Container(
+                    height: 40,
+                    child: Row(
+                      children: <Widget>[
+                        Text(_timeDetails!,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 15)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Close'))
+            ],
+          );
+        });
+  }
+
+  // -------------------------------------
 
   Future<void> _addNewScheduledTask(
     String tskName,
