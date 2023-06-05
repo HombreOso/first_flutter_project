@@ -153,215 +153,239 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
         title: Text('Add Task'),
       ),
       body: SingleChildScrollView(
-        child: Card(
-          elevation: 5,
-          child: Container(
-            padding: EdgeInsets.all(10),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                TextField(
-                  decoration: InputDecoration(labelText: 'Name'),
-                  controller: _titleController,
-                  onSubmitted: (_) => _usedDefaultDate ? null : _submitData(),
-                  // onChanged: (val) {
-                  //   titleInput = val;
-                  // },
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  hintText: 'Name',
+                  focusColor: Colors.amber,
+                  labelStyle: TextStyle(color: Colors.black),
+                  border: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Theme.of(context).primaryColor),
+                      borderRadius: BorderRadius.circular(8)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Theme.of(context).primaryColor)),
                 ),
-                LayoutBuilder(builder: ((context, constraints) {
-                  return SizedBox(
-                    height: 250,
-                    child: TextField(
-                      expands: true,
-                      maxLines: null,
-                      decoration: InputDecoration(labelText: 'Description'),
-                      controller: _descriptionController,
-                      keyboardType: TextInputType.number,
-                      onSubmitted: (_) =>
-                          _usedDefaultDate ? null : _submitData(),
-                      // onChanged: (val) => amountInput = val,
+                controller: _titleController,
+                onSubmitted: (_) => _usedDefaultDate ? null : _submitData(),
+                // onChanged: (val) {
+                //   titleInput = val;
+                // },
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              LayoutBuilder(builder: ((context, constraints) {
+                return SizedBox(
+                  height: 150,
+                  child: TextField(
+                    textAlignVertical: TextAlignVertical.top,
+                    textAlign: TextAlign.start,
+                    expands: true,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                      floatingLabelAlignment: FloatingLabelAlignment.start,
+                      hintText: 'Description',
+                      focusColor: Colors.amber,
+                      labelStyle: TextStyle(color: Colors.black),
+                      border: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Theme.of(context).primaryColor),
+                          borderRadius: BorderRadius.circular(8)),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor)),
                     ),
-                  );
-                })),
-                SizedBox(
-                  height: 20,
-                ),
-                DropdownButtonExample(
-                  onChangedDDL: (value) {
-                    _selectedCategory = value;
-                  },
-                  ctx: context,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 40,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          'Picked Date: ${intl_package.DateFormat.yMd().format(_selectedDate)}',
-                        ),
-                      ),
-                      TextButton(
-                        style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all(
-                              Theme.of(context).primaryColor),
-                          backgroundColor: MaterialStateProperty.all(
-                              Theme.of(context).canvasColor),
-                        ),
-                        child: Text(
-                          'Choose Date',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        onPressed: _presentDatePicker,
-                      ),
-                    ],
+                    controller: _descriptionController,
+                    keyboardType: TextInputType.number,
+                    onSubmitted: (_) => _usedDefaultDate ? null : _submitData(),
+                    // onChanged: (val) => amountInput = val,
                   ),
-                ),
-                Container(
-                  height: 40,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          'Picked Start Time: ${intl_package.DateFormat.yMd().format(_selectedDate)}',
-                        ),
+                );
+              })),
+              SizedBox(
+                height: 20,
+              ),
+              DropdownButtonExample(
+                onChangedDDL: (value) {
+                  _selectedCategory = value;
+                },
+                ctx: context,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: 40,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Picked Date: ${intl_package.DateFormat.yMd().format(_selectedDate)}',
                       ),
-                      TextButton(
-                        style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all(
-                              Theme.of(context).primaryColor),
-                          backgroundColor: MaterialStateProperty.all(
-                              Theme.of(context).canvasColor),
-                        ),
-                        child: Text(
-                          'Choose Start Time',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        onPressed: _presentStartTimePicker,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 40,
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          'Picked End Time: ${intl_package.DateFormat.yMd().format(_selectedDate)}',
-                        ),
-                      ),
-                      TextButton(
-                        style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all(
-                              Theme.of(context).primaryColor),
-                          backgroundColor: MaterialStateProperty.all(
-                              Theme.of(context).canvasColor),
-                        ),
-                        child: Text(
-                          'Choose End Time',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        onPressed: _presentEndTimePicker,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  child: Text(
-                    'Add Task',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
                     ),
-                  ),
-                  style: ButtonStyle(
-                      foregroundColor: MaterialStateProperty.all(
-                          Theme.of(context).primaryColor),
-                      backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).canvasColor),
-                      textStyle: MaterialStateProperty.all(Theme.of(context)
-                          .textTheme
-                          .labelLarge!
-                          .copyWith(color: Colors.white)),
-                      // padding: MaterialStateProperty.all(
-                      //   EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                      // ),
-                      alignment: Alignment.center),
-                  onPressed: _submitData,
-                ),
-                StreamBuilder<QuerySnapshot>(
-                    stream: FirebaseFirestore.instance
-                        .collection('categories')
-                        .orderBy('amount', descending: true)
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      final List<String> loadedCategoryNames = [];
-                      final List<DocumentSnapshot<Map<String, dynamic>>>
-                          documents = snapshot.data!.docs
-                              .cast<DocumentSnapshot<Map<String, dynamic>>>()
-                              .cast<DocumentSnapshot<Map<String, dynamic>>>();
-                      documents.forEach((doc) {
-                        final category = Category.fromSnapshot(doc);
-                        loadedCategoryNames.add(category.name);
-                      });
-
-                      return Container(
-                        //padding: EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            // SizedBox(
-                            //   height: 10,
-                            // ),
-                            if (!loadedCategoryNames.isEmpty)
-                              ElevatedButton(
-                                child: Text(
-                                  'New Category',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                style: ButtonStyle(
-                                    foregroundColor: MaterialStateProperty.all(
-                                        Theme.of(context).primaryColor),
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Theme.of(context).canvasColor),
-                                    textStyle: MaterialStateProperty.all(
-                                        Theme.of(context)
-                                            .textTheme
-                                            .labelLarge!
-                                            .copyWith(color: Colors.white)),
-                                    padding: MaterialStateProperty.all(
-                                      EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 0),
-                                    ),
-                                    alignment: Alignment.center),
-                                onPressed: () =>
-                                    Navigator.pushNamed(context, '/categories'),
-                              ),
-                          ],
+                    TextButton(
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor),
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).canvasColor),
+                      ),
+                      child: Text(
+                        'Choose Date',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
+                      ),
+                      onPressed: _presentDatePicker,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 40,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Picked Start Time: ${intl_package.DateFormat.yMd().format(_selectedDate)}',
+                      ),
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor),
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).canvasColor),
+                      ),
+                      child: Text(
+                        'Choose Start Time',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: _presentStartTimePicker,
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                height: 40,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        'Picked End Time: ${intl_package.DateFormat.yMd().format(_selectedDate)}',
+                      ),
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all(
+                            Theme.of(context).primaryColor),
+                        backgroundColor: MaterialStateProperty.all(
+                            Theme.of(context).canvasColor),
+                      ),
+                      child: Text(
+                        'Choose End Time',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: _presentEndTimePicker,
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton(
+                child: Text(
+                  'Add Task',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(
+                        Theme.of(context).primaryColor),
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).canvasColor),
+                    textStyle: MaterialStateProperty.all(Theme.of(context)
+                        .textTheme
+                        .labelLarge!
+                        .copyWith(color: Colors.white)),
+                    // padding: MaterialStateProperty.all(
+                    //   EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    // ),
+                    alignment: Alignment.center),
+                onPressed: _submitData,
+              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('categories')
+                      .orderBy('amount', descending: true)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
                       );
-                    }),
-              ],
-            ),
+                    }
+                    final List<String> loadedCategoryNames = [];
+                    final List<DocumentSnapshot<Map<String, dynamic>>>
+                        documents = snapshot.data!.docs
+                            .cast<DocumentSnapshot<Map<String, dynamic>>>()
+                            .cast<DocumentSnapshot<Map<String, dynamic>>>();
+                    documents.forEach((doc) {
+                      final category = Category.fromSnapshot(doc);
+                      loadedCategoryNames.add(category.name);
+                    });
+
+                    return Container(
+                      //padding: EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: <Widget>[
+                          // SizedBox(
+                          //   height: 10,
+                          // ),
+                          if (!loadedCategoryNames.isEmpty)
+                            ElevatedButton(
+                              child: Text(
+                                'New Category',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              style: ButtonStyle(
+                                  foregroundColor: MaterialStateProperty.all(
+                                      Theme.of(context).primaryColor),
+                                  backgroundColor: MaterialStateProperty.all(
+                                      Theme.of(context).canvasColor),
+                                  textStyle: MaterialStateProperty.all(
+                                      Theme.of(context)
+                                          .textTheme
+                                          .labelLarge!
+                                          .copyWith(color: Colors.white)),
+                                  padding: MaterialStateProperty.all(
+                                    EdgeInsets.symmetric(
+                                        horizontal: 10, vertical: 0),
+                                  ),
+                                  alignment: Alignment.center),
+                              onPressed: () =>
+                                  Navigator.pushNamed(context, '/categories'),
+                            ),
+                        ],
+                      ),
+                    );
+                  }),
+            ],
           ),
         ),
       ),
