@@ -20,6 +20,14 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
+  // colors to choose from for appointemnts, meetings
+  List<Color> colors_list = [
+    Color(0xFFEF9A9A),
+    Color(0xFFE57373),
+    Color(0xFFEF5350),
+    Color(0xFFF48FB1),
+  ];
+
   Future<TimeOfDay?> time_picker_func(
       selectedTime, entryMode, orientation, tapTargetSize, ctx) async {
     TimeOfDay? time = await showTimePicker(
@@ -41,7 +49,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
             textDirection: TextDirection.ltr,
             child: MediaQuery(
               data: MediaQuery.of(context).copyWith(
-                alwaysUse24HourFormat: true,
+                alwaysUse24HourFormat: false,
               ),
               child: child!,
             ),
