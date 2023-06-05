@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/screens/add_new_task_screen.dart';
 import 'package:flutter_complete_guide/screens/auth_screen.dart';
 import 'package:flutter_complete_guide/screens/confirm_email_screen.dart';
 import 'package:flutter_complete_guide/screens/splash_screen.dart';
+import 'package:flutter_complete_guide/widgets/new_scheduled_task.dart';
 
 import '../screens/expenses_screen.dart';
 
@@ -82,6 +84,7 @@ class MyApp extends StatelessWidget {
         '/reset_password': (context) => ResetPasswordScreen(),
         '/confirm_email': (context) => EmailVerificationScreen(),
         '/calendar': (context) => CalendarScreen(),
+        '/new_task': (context) => AddTaskScreen(),
       },
       home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),

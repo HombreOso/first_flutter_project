@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_complete_guide/widgets/new_scheduled_task.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../models/meeting_class.dart';
 import '../models/scheduled_task.dart';
 
 import '../models/priority_enum.dart';
@@ -29,58 +29,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
     Color(0xFFF48FB1),
   ];
 
-  Future<TimeOfDay?> time_picker_func(
-      selectedTime, entryMode, orientation, tapTargetSize, ctx) async {
-    TimeOfDay? time = await showTimePicker(
-      context: ctx,
-      initialTime: selectedTime ?? TimeOfDay.now(),
-      initialEntryMode: entryMode,
-      orientation: orientation,
-      builder: (BuildContext context, Widget? child) {
-        // We just wrap these environmental changes around the
-        // child in this builder so that we can apply the
-        // options selected above. In regular usage, this is
-        // rarely necessary, because the default values are
-        // usually used as-is.
-        return Theme(
-          data: Theme.of(context).copyWith(
-            materialTapTargetSize: tapTargetSize,
-          ),
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: MediaQuery(
-              data: MediaQuery.of(context).copyWith(
-                alwaysUse24HourFormat: false,
-              ),
-              child: child!,
-            ),
-          ),
-        );
-      },
-    );
-    setState(() {
-      selectedTime = time;
-    });
-    return time;
-  }
-
-  void _startAddNewTransaction(BuildContext ctx) {
-    showModalBottomSheet(
-      context: ctx,
-      builder: (_) {
-        return GestureDetector(
-          onTap: () {},
-          child: NewScheduledTask(
-            _addNewScheduledTask,
-            "0",
-            "",
-            "",
-            DateTime.parse("2023-04-09"),
-          ),
-          behavior: HitTestBehavior.opaque,
-        );
-      },
-    );
+  void _startAddNewTask(BuildContext ctx) {
+    Navigator.pushNamed(context, '/new_task');
   }
 
   @override
@@ -104,13 +54,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
           backgroundColor: Theme.of(context).canvasColor,
           foregroundColor: Theme.of(context).primaryColor,
           child: Icon(Icons.add),
-          onPressed: () => time_picker_func(
-                TimeOfDay.now(),
-                TimePickerEntryMode.dial,
-                Orientation.portrait,
-                MaterialTapTargetSize.padded,
-                context,
-              )),
+          onPressed: () => _startAddNewTask(context)
+
+          // time_picker_func(
+          //       TimeOfDay.now(),
+          //       TimePickerEntryMode.dial,
+          //       Orientation.portrait,
+          //       MaterialTapTargetSize.padded,
+          //       context,
+          //     )
+
+          ),
     );
   }
 
@@ -202,7 +156,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     String tskId,
   ) async {
     final String transactionIdAsCurrentDateTime = DateTime.now().toString();
-    final newTx = ScheduledTask(
+    final newTsk = ScheduledTask(
       name: tskName,
       deadline: tskDeadline,
       start_datetime_planned: tskStartDatetimePlanned,
@@ -216,7 +170,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       id: tskId,
     );
     setState(() {
-      _userScheduledTasks.add(newTx);
+      _userScheduledTasks.add(newTsk);
     });
     // Write the transaction to Firebase
     await tasksCollectionRef.add({
@@ -240,11 +194,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
     meetings.add(Meeting(
-        'Conference', startTime, endTime, const Color(0xFF0F8644), false));
+        'Conference', startTime, endTime, const Color(0xFFF48FB1), false));
     return meetings;
   }
-
-  void _addScheduledTask() {}
 }
 
 /// An object to set the appointment collection data source to calendar, which
@@ -291,26 +243,4 @@ class MeetingDataSource extends CalendarDataSource {
 
     return meetingData;
   }
-}
-
-/// Custom business object class which contains properties to hold the detailed
-/// information about the event data which will be rendered in calendar.
-class Meeting {
-  /// Creates a meeting class with required details.
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
-
-  /// Event name which is equivalent to subject property of [Appointment].
-  String eventName;
-
-  /// From which is equivalent to start time property of [Appointment].
-  DateTime from;
-
-  /// To which is equivalent to end time property of [Appointment].
-  DateTime to;
-
-  /// Background which is equivalent to color property of [Appointment].
-  Color background;
-
-  /// IsAllDay which is equivalent to isAllDay property of [Appointment].
-  bool isAllDay;
 }
