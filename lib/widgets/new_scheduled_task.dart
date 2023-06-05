@@ -247,6 +247,9 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                   ],
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 height: 40,
                 child: Row(
@@ -273,6 +276,9 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                     ),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 10,
               ),
               Container(
                 height: 40,
