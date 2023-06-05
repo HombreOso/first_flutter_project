@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_complete_guide/widgets/new_scheduled_task.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'package:flutter/material.dart';
@@ -61,6 +62,25 @@ class _CalendarScreenState extends State<CalendarScreen> {
       selectedTime = time;
     });
     return time;
+  }
+
+  void _startAddNewTransaction(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return GestureDetector(
+          onTap: () {},
+          child: NewScheduledTask(
+            _addNewScheduledTask,
+            "0",
+            "",
+            "",
+            DateTime.parse("2023-04-09"),
+          ),
+          behavior: HitTestBehavior.opaque,
+        );
+      },
+    );
   }
 
   @override

@@ -6,14 +6,14 @@ import 'package:intl/intl.dart';
 import 'dropdownExpenseCategories.dart';
 
 class NewScheduledTask extends StatefulWidget {
-  final Function addTx;
+  final Function addTsk;
   final String initialAmountText;
   final String initialTitleText;
   final String txDateIdAsString;
   final DateTime txDate;
 
   NewScheduledTask(
-    this.addTx,
+    this.addTsk,
     this.initialAmountText,
     this.initialTitleText,
     this.txDateIdAsString,
@@ -51,7 +51,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       return;
     }
 
-    widget.addTx(
+    widget.addTsk(
       enteredTitle,
       enteredAmount,
       _selectedDate,
