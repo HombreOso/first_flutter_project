@@ -29,15 +29,16 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   Future<void> _addNewScheduledTask(
     String tskName,
+    String tskCategory,
     DateTime tskStartDatetimePlanned,
     DateTime tskEndDatetimePlanned,
     DateTime tskStartDatetimeAsIs,
     DateTime tskEndDatetimeAsIs,
-    bool tskIsCanceled,
-    Priority tskPriority,
-    String tskDescription,
-    String tskUid,
-    String tskId,
+    bool? tskIsCanceled,
+    Priority? tskPriority,
+    String? tskDescription,
+    String? tskUid,
+    String? tskId,
   ) async {
     final newTsk = ScheduledTask(
       name: tskName,
@@ -81,7 +82,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return NewScheduledTask(
-        _addNewScheduledTask, "", DateTime.now().toString(), DateTime.now());
+    return NewScheduledTask(_addNewScheduledTask, "", "",
+        DateTime.now().toString(), DateTime.now());
   }
 }

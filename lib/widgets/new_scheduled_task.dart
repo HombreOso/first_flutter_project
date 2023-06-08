@@ -3,17 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/models/category.dart';
 import 'package:intl/intl.dart' as intl_package;
 
+import '../models/priority_enum.dart';
 import 'dropdownExpenseCategories.dart';
 
 class NewScheduledTask extends StatefulWidget {
   final Function addTsk;
   final String initialTitleText;
+  final String initialDescription;
   final String txDateIdAsString;
   final DateTime txDate;
 
   NewScheduledTask(
     this.addTsk,
     this.initialTitleText,
+    this.initialDescription,
     this.txDateIdAsString,
     this.txDate,
   );
@@ -25,15 +28,28 @@ class NewScheduledTask extends StatefulWidget {
 class _NewScheduledTaskState extends State<NewScheduledTask> {
   var _descriptionController;
   var _titleController;
+  DateTime tskStartDatetimePlanned = DateTime.timestamp();
+  String tskCategory = "Job";
+  DateTime tskEndDatetimePlanned = DateTime.timestamp().add(Duration(hours: 3));
+  //hour: TimeOfDay.now().hour + 1, minute: TimeOfDay.now().minute
+  DateTime tskStartDatetimeAsIs = DateTime.timestamp();
+  DateTime tskEndDatetimeAsIs = DateTime.timestamp().add(Duration(hours: 3));
+  bool? tskIsCanceled;
+  Priority? tskPriority;
+  String? tskDescription;
+  String? tskUid;
+  String? tskId;
+
   @override
   void initState() {
     super.initState();
     _titleController = TextEditingController(text: widget.initialTitleText);
+    _descriptionController =
+        TextEditingController(text: widget.initialTitleText);
   }
 
   // final _titleController = TextEditingController();
   // final _descriptionController = TextEditingController();
-  String _selectedCategory = "Food";
   DateTime _selectedDate = DateTime.now();
   TimeOfDay? _selectedStartTime = TimeOfDay.now();
   TimeOfDay? _selectedEndTime =
@@ -49,10 +65,9 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
     if (_descriptionController.text.isEmpty) {
       return;
     }
-    final enteredTitle = _titleController.text;
-    final enteredAmount = double.parse(_descriptionController.text);
+    final tskName = _titleController.text;
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    if (tskName.isEmpty) {
       return;
     }
 
@@ -61,13 +76,17 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       return;
     }
     widget.addTsk(
-      enteredTitle,
-      enteredAmount,
-      _selectedDate,
-      _selectedCategory,
-      widget.txDateIdAsString,
-      _usedDefaultDate,
-      widget.txDate,
+      tskName,
+      tskCategory,
+      tskStartDatetimePlanned,
+      tskEndDatetimePlanned,
+      tskStartDatetimeAsIs,
+      tskEndDatetimeAsIs,
+      tskIsCanceled,
+      tskPriority,
+      tskDescription,
+      tskUid,
+      tskId,
     );
 
     Navigator.of(context).pop();
@@ -221,7 +240,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
               ),
               DropdownButtonExample(
                 onChangedDDL: (value) {
-                  _selectedCategory = value;
+                  tskCategory = value;
                 },
                 ctx: context,
               ),
