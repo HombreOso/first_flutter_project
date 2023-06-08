@@ -161,7 +161,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
               TextField(
                 decoration: InputDecoration(
                   hintText: 'Name',
-                  focusColor: Colors.amber,
+                  focusColor: Theme.of(context).secondaryHeaderColor,
                   labelStyle: TextStyle(color: Colors.black),
                   border: OutlineInputBorder(
                       borderSide:
@@ -191,7 +191,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                     decoration: InputDecoration(
                       floatingLabelAlignment: FloatingLabelAlignment.start,
                       hintText: 'Description',
-                      focusColor: Colors.amber,
+                      focusColor: Theme.of(context).secondaryHeaderColor,
                       labelStyle: TextStyle(color: Colors.black),
                       border: OutlineInputBorder(
                           borderSide:
@@ -319,7 +319,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                 ),
                 style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(
-                        Theme.of(context).primaryColor),
+                        Theme.of(context).secondaryHeaderColor),
                     backgroundColor: MaterialStateProperty.all(
                         Theme.of(context).canvasColor),
                     textStyle: MaterialStateProperty.all(Theme.of(context)
