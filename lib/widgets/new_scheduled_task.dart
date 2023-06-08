@@ -125,7 +125,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2023),
-      lastDate: DateTime.now(),
+      lastDate: DateTime.now().add(Duration(days: 365)),
     ).then((pickedDate) {
       if (pickedDate == null) {
         setState(() {
