@@ -41,6 +41,10 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
 
   bool _usedDefaultDate = true;
 
+  double convertTimeOfDayToDoubleFormatHours(TimeOfDay timeToConvert) {
+    return timeToConvert.hour + timeToConvert.minute / 60.0;
+  }
+
   void _submitData() {
     if (_descriptionController.text.isEmpty) {
       return;
@@ -52,6 +56,10 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       return;
     }
 
+    if (convertTimeOfDayToDoubleFormatHours(_selectedEndTime!) <=
+        convertTimeOfDayToDoubleFormatHours(_selectedStartTime!)) {
+      return;
+    }
     widget.addTsk(
       enteredTitle,
       enteredAmount,
@@ -256,7 +264,13 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        'Picked Start Time: ${intl_package.DateFormat.yMd().format(_selectedDate)}',
+                        'Picked Start Time: ${intl_package.DateFormat.jm().format(DateTime(
+                          DateTime.now().year,
+                          DateTime.now().month,
+                          DateTime.now().day,
+                          _selectedStartTime!.hour,
+                          _selectedStartTime!.minute,
+                        ))}',
                       ),
                     ),
                     TextButton(
@@ -286,7 +300,13 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        'Picked End Time: ${intl_package.DateFormat.yMd().format(_selectedDate)}',
+                        'Picked End Time: ${intl_package.DateFormat.jm().format(DateTime(
+                          DateTime.now().year,
+                          DateTime.now().month,
+                          DateTime.now().day,
+                          _selectedEndTime!.hour,
+                          _selectedEndTime!.minute,
+                        ))}',
                       ),
                     ),
                     TextButton(
