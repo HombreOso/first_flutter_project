@@ -1,4 +1,4 @@
-enum Priority {
+enum Priority_Enum {
   VeryImportant,
   Important,
   Normal,

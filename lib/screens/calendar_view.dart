@@ -149,7 +149,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     DateTime tskStartDatetimeAsIs,
     DateTime tskEndDatetimeAsIs,
     bool tskIsCanceled,
-    Priority tskPriority,
+    Priority_Enum tskPriority,
     String tskDescription,
     String tskUid,
     String tskId,

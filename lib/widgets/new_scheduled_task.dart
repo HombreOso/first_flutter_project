@@ -5,6 +5,7 @@ import 'package:intl/intl.dart' as intl_package;
 
 import '../models/priority_enum.dart';
 import 'dropdownExpenseCategories.dart';
+import 'dropdownPriority.dart';
 
 class NewScheduledTask extends StatefulWidget {
   final Function addTsk;
@@ -35,7 +36,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
   DateTime tskStartDatetimeAsIs = DateTime.timestamp();
   DateTime tskEndDatetimeAsIs = DateTime.timestamp().add(Duration(hours: 3));
   bool? tskIsCanceled;
-  Priority? tskPriority;
+  Priority_Enum? tskPriority;
   String? tskDescription;
   String? tskUid;
   String? tskId;
@@ -236,11 +237,17 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                 );
               })),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               DropdownButtonExample(
                 onChangedDDL: (value) {
                   tskCategory = value;
+                },
+                ctx: context,
+              ),
+              DropdownButtonPriority(
+                onChangedDDL: (value) {
+                  tskPriority = value;
                 },
                 ctx: context,
               ),

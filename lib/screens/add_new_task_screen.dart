@@ -35,7 +35,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     DateTime tskStartDatetimeAsIs,
     DateTime tskEndDatetimeAsIs,
     bool? tskIsCanceled,
-    Priority? tskPriority,
+    Priority_Enum? tskPriority,
     String? tskDescription,
     String? tskUid,
     String? tskId,
