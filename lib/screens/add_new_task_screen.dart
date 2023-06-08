@@ -29,7 +29,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   Future<void> _addNewScheduledTask(
     String tskName,
-    DateTime tskDeadline,
     DateTime tskStartDatetimePlanned,
     DateTime tskEndDatetimePlanned,
     DateTime tskStartDatetimeAsIs,
@@ -42,7 +41,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   ) async {
     final newTsk = ScheduledTask(
       name: tskName,
-      deadline: tskDeadline,
       start_datetime_planned: tskStartDatetimePlanned,
       end_datetime_planned: tskEndDatetimePlanned,
       start_datetime_as_is: tskStartDatetimeAsIs,
@@ -59,7 +57,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     // Write the transaction to Firebase
     await tasksCollectionRef.add({
       'name': tskName,
-      'deadline': tskDeadline,
       'start_datetime_planned': tskStartDatetimePlanned,
       'end_datetime_planned': tskEndDatetimePlanned,
       'start_datetime_as_is': tskStartDatetimeAsIs,

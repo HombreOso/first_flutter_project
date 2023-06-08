@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ScheduledTask {
   var name;
-  var deadline;
   var start_datetime_planned;
   var end_datetime_planned;
   var start_datetime_as_is;
@@ -15,7 +14,6 @@ class ScheduledTask {
 
   ScheduledTask(
       {required this.name,
-      required this.deadline,
       required this.start_datetime_planned,
       required this.end_datetime_planned,
       required this.start_datetime_as_is,
@@ -29,7 +27,6 @@ class ScheduledTask {
   factory ScheduledTask.fromMap(Map<String, dynamic> map) {
     return ScheduledTask(
       name: map['name'],
-      deadline: map['deadline'],
       start_datetime_planned: map['start_datetime_planned'],
       end_datetime_planned: map['end_datetime_planned'],
       start_datetime_as_is: map['start_datetime_as_is'],
@@ -45,7 +42,6 @@ class ScheduledTask {
   Map<String, dynamic> toMap() {
     return {
       'name': name,
-      'deadline': deadline,
       'start_datetime_planned': start_datetime_planned,
       'end_datetime_planned': end_datetime_planned,
       'start_datetime_as_is': start_datetime_as_is,
@@ -63,7 +59,6 @@ class ScheduledTask {
     final data = snapshot.data();
     return ScheduledTask(
       name: data!['name'] as String,
-      deadline: data['deadline'] as DateTime,
       start_datetime_planned: data['start_datetime_planned'] as DateTime,
       end_datetime_planned: data['end_datetime_planned'] as DateTime,
       start_datetime_as_is: data['start_datetime_as_is'] as DateTime,
