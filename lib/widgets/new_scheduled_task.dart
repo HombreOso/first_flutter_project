@@ -36,7 +36,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
   DateTime tskStartDatetimeAsIs = DateTime.timestamp();
   DateTime tskEndDatetimeAsIs = DateTime.timestamp().add(Duration(hours: 3));
   bool? tskIsCanceled;
-  Priority_Enum? tskPriority;
+  String? tskPriorityName;
   String? tskDescription;
   String? tskUid;
   String? tskId;
@@ -84,7 +84,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       tskStartDatetimeAsIs,
       tskEndDatetimeAsIs,
       tskIsCanceled,
-      tskPriority,
+      tskPriorityName,
       tskDescription,
       tskUid,
       tskId,
@@ -247,7 +247,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
               ),
               DropdownButtonPriority(
                 onChangedDDL: (value) {
-                  tskPriority = value;
+                  tskPriorityName = value.name;
                 },
                 ctx: context,
               ),
