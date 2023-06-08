@@ -47,7 +47,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       end_datetime_as_is: tskEndDatetimeAsIs,
       is_canceled: tskIsCanceled,
       priority: tskPriority,
-      decription: tskDescription,
+      description: tskDescription,
       uid: uid,
       id: tskId,
     );
@@ -63,7 +63,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       'end_datetime_as_is': tskEndDatetimeAsIs,
       'is_canceled': tskIsCanceled,
       'priority': tskPriority,
-      'decription': tskDescription,
+      'description': tskDescription,
       'uid': uid,
       'id': tskId,
     });

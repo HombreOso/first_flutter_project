@@ -8,7 +8,7 @@ class ScheduledTask {
   var end_datetime_as_is;
   var is_canceled;
   var priority;
-  var decription;
+  var description;
   var uid;
   var id;
 
@@ -20,7 +20,7 @@ class ScheduledTask {
       required this.end_datetime_as_is,
       required this.is_canceled,
       required this.priority,
-      required this.decription,
+      required this.description,
       required this.uid,
       required this.id});
 
@@ -33,7 +33,7 @@ class ScheduledTask {
       end_datetime_as_is: map['end_datetime_as_is'],
       is_canceled: map['is_canceled'],
       priority: map['priority'],
-      decription: map['decription'],
+      description: map['description'],
       uid: map['uid'],
       id: map['id'],
     );
@@ -48,7 +48,7 @@ class ScheduledTask {
       'end_datetime_as_is': end_datetime_as_is,
       'is_canceled': is_canceled,
       'priority': priority,
-      'decription': decription,
+      'description': description,
       'uid': uid,
       'id': id,
     };
@@ -65,7 +65,7 @@ class ScheduledTask {
       end_datetime_as_is: data['end_datetime_as_is'] as DateTime,
       is_canceled: data['is_canceled'] as bool,
       priority: data['priority'] as String,
-      decription: data['decription'] as String,
+      description: data['description'] as String,
       uid: data['uid'] as String,
       id: data['id'] as String,
     );
