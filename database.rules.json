@@ -1,6 +1,10 @@
 {
   "rules": {
-    ".read": "now < 1686780000000",  // 2023-6-15
-    ".write": "now < 1686780000000",  // 2023-6-15
+    ".read": "auth != null",
+    ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'admin'",
+    "data": {
+      ".read": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'user'",
+      ".write": "auth != null && root.child('users').child(auth.uid).child('role').val() === 'admin'"
+    }
   }
 }
