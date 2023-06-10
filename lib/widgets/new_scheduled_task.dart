@@ -28,7 +28,7 @@ class NewScheduledTask extends StatefulWidget {
 
 class _NewScheduledTaskState extends State<NewScheduledTask> {
   var _descriptionController;
-  var _titleController;
+  var _tskNameController;
   DateTime tskStartDatetimePlanned = DateTime.timestamp();
   String tskCategory = "Job";
   DateTime tskEndDatetimePlanned = DateTime.timestamp().add(Duration(hours: 3));
@@ -44,12 +44,12 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
   @override
   void initState() {
     super.initState();
-    _titleController = TextEditingController(text: widget.initialTitleText);
+    _tskNameController = TextEditingController(text: widget.initialTitleText);
     _descriptionController =
         TextEditingController(text: widget.initialTitleText);
   }
 
-  // final _titleController = TextEditingController();
+  // final _tskNameController = TextEditingController();
   // final _descriptionController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   TimeOfDay? _selectedStartTime = TimeOfDay.now();
@@ -66,7 +66,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
     if (_descriptionController.text.isEmpty) {
       return;
     }
-    final tskName = _titleController.text;
+    final tskName = _tskNameController.text;
 
     if (tskName.isEmpty) {
       return;
@@ -199,7 +199,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                       borderSide:
                           BorderSide(color: Theme.of(context).primaryColor)),
                 ),
-                controller: _titleController,
+                controller: _tskNameController,
                 onSubmitted: (_) => _usedDefaultDate ? null : _submitData(),
                 // onChanged: (val) {
                 //   titleInput = val;

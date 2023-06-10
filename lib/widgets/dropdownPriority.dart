@@ -37,7 +37,7 @@ class _DropdownButtonPriorityState extends State<DropdownButtonPriority> {
           child: Row(
             children: [
               Expanded(
-                child: Text('$dropdownValue'),
+                child: Text('${priorityMap[dropdownValue]}'),
               ),
               Container(
                 height: 35,
@@ -57,7 +57,7 @@ class _DropdownButtonPriorityState extends State<DropdownButtonPriority> {
                       return PopupMenuItem<String>(
                         value: value.name,
                         child: Text(
-                          value.name,
+                          priorityMap[value]!,
                           style: TextStyle(
                             color: Theme.of(context).canvasColor,
                             fontFamily: 'OpenSans',
