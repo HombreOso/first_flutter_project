@@ -29,12 +29,12 @@ class NewScheduledTask extends StatefulWidget {
 class _NewScheduledTaskState extends State<NewScheduledTask> {
   var _descriptionController;
   var _tskNameController;
-  DateTime tskStartDatetimePlanned = DateTime.timestamp();
+  DateTime tskStartDatetimePlanned = DateTime.now();
   String tskCategory = "Job";
-  DateTime tskEndDatetimePlanned = DateTime.timestamp().add(Duration(hours: 3));
+  DateTime tskEndDatetimePlanned = DateTime.now().add(Duration(hours: 3));
   //hour: TimeOfDay.now().hour + 1, minute: TimeOfDay.now().minute
-  DateTime tskStartDatetimeAsIs = DateTime.timestamp();
-  DateTime tskEndDatetimeAsIs = DateTime.timestamp().add(Duration(hours: 3));
+  DateTime tskStartDatetimeAsIs = DateTime.now();
+  DateTime tskEndDatetimeAsIs = DateTime.now().add(Duration(hours: 3));
   bool? tskIsCanceled;
   String? tskPriorityName;
   String? tskDescription;

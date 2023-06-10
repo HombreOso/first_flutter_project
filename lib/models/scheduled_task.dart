@@ -2,10 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ScheduledTask {
   var name;
-  var start_datetime_planned;
-  var end_datetime_planned;
-  var start_datetime_as_is;
-  var end_datetime_as_is;
+  DateTime start_datetime_planned;
+  DateTime end_datetime_planned;
+  DateTime start_datetime_as_is;
+  DateTime end_datetime_as_is;
   var is_canceled;
   var priority;
   var description;
@@ -27,10 +27,14 @@ class ScheduledTask {
   factory ScheduledTask.fromMap(Map<String, dynamic> map) {
     return ScheduledTask(
       name: map['name'],
-      start_datetime_planned: map['start_datetime_planned'],
-      end_datetime_planned: map['end_datetime_planned'],
-      start_datetime_as_is: map['start_datetime_as_is'],
-      end_datetime_as_is: map['end_datetime_as_is'],
+      start_datetime_planned:
+          DateTime.fromMillisecondsSinceEpoch(map['start_datetime_planned']),
+      end_datetime_planned:
+          DateTime.fromMillisecondsSinceEpoch(map['end_datetime_planned']),
+      start_datetime_as_is:
+          DateTime.fromMillisecondsSinceEpoch(map['start_datetime_as_is']),
+      end_datetime_as_is:
+          DateTime.fromMillisecondsSinceEpoch(map['end_datetime_as_is']),
       is_canceled: map['is_canceled'],
       priority: map['priority'],
       description: map['description'],
@@ -59,15 +63,19 @@ class ScheduledTask {
     final data = snapshot.data();
     return ScheduledTask(
       name: data!['name'] as String,
-      start_datetime_planned: data['start_datetime_planned'] as DateTime,
-      end_datetime_planned: data['end_datetime_planned'] as DateTime,
-      start_datetime_as_is: data['start_datetime_as_is'] as DateTime,
-      end_datetime_as_is: data['end_datetime_as_is'] as DateTime,
-      is_canceled: data['is_canceled'] as bool,
-      priority: data['priority'] as String,
-      description: data['description'] as String,
-      uid: data['uid'] as String,
-      id: data['id'] as String,
+      start_datetime_planned:
+          DateTime.fromMillisecondsSinceEpoch(data['start_datetime_planned']),
+      end_datetime_planned:
+          DateTime.fromMillisecondsSinceEpoch(data['end_datetime_planned']),
+      start_datetime_as_is:
+          DateTime.fromMillisecondsSinceEpoch(data['start_datetime_as_is']),
+      end_datetime_as_is:
+          DateTime.fromMillisecondsSinceEpoch(data['end_datetime_as_is']),
+      is_canceled: data['is_canceled'] as bool?,
+      priority: data['priority'] as String?,
+      description: data['description'] as String?,
+      uid: data['uid'] as String?,
+      id: data['id'] as String?,
     );
   }
 }

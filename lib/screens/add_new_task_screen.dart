@@ -52,10 +52,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     // Write the transaction to Firebase
     await tasksCollectionRef.add({
       'name': tskName,
-      'start_datetime_planned': tskStartDatetimePlanned,
-      'end_datetime_planned': tskEndDatetimePlanned,
-      'start_datetime_as_is': tskStartDatetimeAsIs,
-      'end_datetime_as_is': tskEndDatetimeAsIs,
+      'start_datetime_planned': tskStartDatetimePlanned.millisecondsSinceEpoch,
+      'end_datetime_planned': tskEndDatetimePlanned.millisecondsSinceEpoch,
+      'start_datetime_planned_clear': tskStartDatetimePlanned,
+      'end_datetime_planned_clear': tskEndDatetimePlanned,
+      'start_datetime_as_is': tskStartDatetimeAsIs.millisecondsSinceEpoch,
+      'end_datetime_as_is': tskEndDatetimeAsIs.millisecondsSinceEpoch,
       'is_canceled': tskIsCanceled,
       'priority': tskPriorityName,
       'description': tskDescription,

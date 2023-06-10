@@ -22,6 +22,10 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreenState extends State<CalendarScreen> {
   // colors to choose from for appointemnts, meetings
+
+  static final CollectionReference tasksCollectionRef =
+      FirebaseFirestore.instance.collection('tasks');
+
   List<Color> colors_list = [
     Color(0xFFEF9A9A),
     Color(0xFFE57373),
@@ -33,21 +37,46 @@ class _CalendarScreenState extends State<CalendarScreen> {
     Navigator.pushNamed(context, '/new_task');
   }
 
+  Future<List<ScheduledTask>> get listOfTasks async {
+    final snapshot = await FirebaseFirestore.instance.collection('tasks').get();
+    return await snapshot.docs
+        .map((doc) => ScheduledTask.fromMap(doc.data()))
+        .toList()
+        .where((tsk) => tsk.uid == uid)
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 30, bottom: 15),
-        child: SfCalendar(
-          view: CalendarView.week,
-          dataSource: MeetingDataSource(_getDataSource()),
-          // by default the month appointment display mode set as Indicator, we can
-          // change the display mode as appointment using the appointment display
-          // mode property
-          monthViewSettings: const MonthViewSettings(
-              appointmentDisplayMode: MonthAppointmentDisplayMode.appointment),
-          onTap: calendarTapped,
-        ),
+        child: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance.collection('tasks').snapshots(),
+            builder: (context, snapshot) {
+              final List<ScheduledTask> loadedTasks = [];
+              //try {
+              final List<DocumentSnapshot<Map<String, dynamic>>> documents =
+                  snapshot.data!.docs
+                      .cast<DocumentSnapshot<Map<String, dynamic>>>();
+              documents.forEach((doc) {
+                print("before snapshot");
+                final task = ScheduledTask.fromSnapshot(doc);
+                print("after snapshot");
+                loadedTasks.add(task);
+              });
+              return SfCalendar(
+                view: CalendarView.week,
+                dataSource: MeetingDataSource(_getDataSource(loadedTasks)),
+                // by default the month appointment display mode set as Indicator, we can
+                // change the display mode as appointment using the appointment display
+                // mode property
+                monthViewSettings: const MonthViewSettings(
+                    appointmentDisplayMode:
+                        MonthAppointmentDisplayMode.appointment),
+                onTap: calendarTapped,
+              );
+            }),
       ),
       floatingActionButton: FloatingActionButton(
           focusColor: Theme.of(context).canvasColor,
@@ -69,9 +98,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   List<ScheduledTask> _userScheduledTasks = [];
-
-  static final CollectionReference tasksCollectionRef =
-      FirebaseFirestore.instance.collection('tasks');
 
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
@@ -174,6 +200,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
       'name': tskName,
       'start_datetime_planned': tskStartDatetimePlanned,
       'end_datetime_planned': tskEndDatetimePlanned,
+      'start_datetime_planned_clear': tskStartDatetimePlanned,
+      'end_datetime_planned_clear': tskEndDatetimePlanned,
       'start_datetime_as_is': tskStartDatetimeAsIs,
       'end_datetime_as_is': tskEndDatetimeAsIs,
       'is_canceled': tskIsCanceled,
@@ -184,13 +212,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
     });
   }
 
-  List<Meeting> _getDataSource() {
+  List<Meeting> _getDataSource(List<ScheduledTask> tasks) {
     final List<Meeting> meetings = <Meeting>[];
     final DateTime today = DateTime.now();
     final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
     meetings.add(Meeting(
         'Conference', startTime, endTime, const Color(0xFFF48FB1), false));
+    tasks.forEach((element) {
+      meetings.add(Meeting(element.name, element.start_datetime_planned,
+          element.end_datetime_planned, Color(0xFFF48FB1), false));
+    });
     return meetings;
   }
 }
