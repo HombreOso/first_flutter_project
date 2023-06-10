@@ -62,7 +62,20 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
     return timeToConvert.hour + timeToConvert.minute / 60.0;
   }
 
+  DateTime convertTimeOfDayToDateTime(
+      TimeOfDay? timeOfDayToConvert, DateTime selectedDate) {
+    return DateTime(
+      selectedDate.year,
+      selectedDate.month,
+      selectedDate.day,
+      timeOfDayToConvert!.hour,
+      timeOfDayToConvert.minute,
+    );
+  }
+
   void _submitData() {
+    final tskDescription = _descriptionController.text;
+
     if (_descriptionController.text.isEmpty) {
       return;
     }
@@ -136,6 +149,9 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       MaterialTapTargetSize.padded,
       context,
     );
+    tskStartDatetimePlanned =
+        convertTimeOfDayToDateTime(_selectedStartTime, _selectedDate);
+    print(tskStartDatetimePlanned.toString());
   }
 
   void _presentEndTimePicker() async {
@@ -146,6 +162,8 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       MaterialTapTargetSize.padded,
       context,
     );
+    tskEndDatetimePlanned =
+        convertTimeOfDayToDateTime(_selectedEndTime, _selectedDate);
   }
 
   void _presentDatePicker() {
@@ -159,12 +177,20 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
         setState(() {
           print("then: $pickedDate");
           _selectedDate = DateTime.now();
+          tskStartDatetimePlanned =
+              convertTimeOfDayToDateTime(_selectedStartTime, _selectedDate);
+          tskEndDatetimePlanned =
+              convertTimeOfDayToDateTime(_selectedEndTime, _selectedDate);
         });
         _usedDefaultDate = true;
       } else {
         setState(() {
           print("else: $pickedDate");
           _selectedDate = pickedDate;
+          tskStartDatetimePlanned =
+              convertTimeOfDayToDateTime(_selectedStartTime, _selectedDate);
+          tskEndDatetimePlanned =
+              convertTimeOfDayToDateTime(_selectedEndTime, _selectedDate);
         });
         _usedDefaultDate = false;
       }
@@ -250,7 +276,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
               ),
               DropdownButtonPriority(
                 onChangedDDL: (value) {
-                  tskPriorityName = value.name;
+                  tskPriorityName = priorityMap[value];
                 },
                 ctx: context,
               ),
