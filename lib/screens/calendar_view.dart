@@ -54,6 +54,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
         child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance.collection('tasks').snapshots(),
             builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
               final List<ScheduledTask> loadedTasks = [];
               //try {
               final List<DocumentSnapshot<Map<String, dynamic>>> documents =
@@ -214,11 +219,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   List<Meeting> _getDataSource(List<ScheduledTask> tasks) {
     final List<Meeting> meetings = <Meeting>[];
-    final DateTime today = DateTime.now();
-    final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
-    final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting(
-        'Conference', startTime, endTime, const Color(0xFFF48FB1), false));
+
     tasks.forEach((element) {
       meetings.add(Meeting(element.name, element.start_datetime_planned,
           element.end_datetime_planned, Color(0xFFF48FB1), false));
