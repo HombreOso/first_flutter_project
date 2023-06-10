@@ -94,7 +94,7 @@ class MyApp extends StatelessWidget {
             }
             if (userSnapshot.hasData) {
               return FirebaseAuth.instance.currentUser!.emailVerified
-                  ? MyHomePage()
+                  ? CalendarScreen()
                   : EmailVerificationScreen();
             }
             return AuthPage();
