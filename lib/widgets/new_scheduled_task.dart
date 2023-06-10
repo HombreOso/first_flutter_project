@@ -245,6 +245,9 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                 },
                 ctx: context,
               ),
+              SizedBox(
+                height: 10,
+              ),
               DropdownButtonPriority(
                 onChangedDDL: (value) {
                   tskPriorityName = value.name;
