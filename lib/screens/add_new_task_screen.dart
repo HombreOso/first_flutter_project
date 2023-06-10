@@ -3,15 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/widgets/new_scheduled_task.dart';
 
 import '../models/meeting_class.dart';
-import '../models/priority_enum.dart';
 import '../models/scheduled_task.dart';
-import '../widgets/new_transaction.dart';
-import '../widgets/transaction_list.dart';
-import '../widgets/chart.dart';
-import '../models/transaction.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 
 class AddTaskScreen extends StatefulWidget {
   // String titleInput;
