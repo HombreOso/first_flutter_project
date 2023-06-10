@@ -213,6 +213,9 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextField(
+                onTapOutside: ((event) {
+                  FocusScope.of(context).unfocus();
+                }),
                 decoration: InputDecoration(
                   hintText: 'Name',
                   focusColor: Theme.of(context).secondaryHeaderColor,
@@ -238,6 +241,9 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                 return SizedBox(
                   height: 150,
                   child: TextField(
+                    onTapOutside: ((event) {
+                      FocusScope.of(context).unfocus();
+                    }),
                     textAlignVertical: TextAlignVertical.top,
                     textAlign: TextAlign.start,
                     expands: true,
