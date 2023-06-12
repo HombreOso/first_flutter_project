@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_complete_guide/models/category.dart';
 import 'package:intl/intl.dart' as intl_package;
 
@@ -55,6 +56,9 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
   TimeOfDay? _selectedStartTime = TimeOfDay.now();
   TimeOfDay? _selectedEndTime =
       TimeOfDay(hour: TimeOfDay.now().hour + 1, minute: TimeOfDay.now().minute);
+
+  Color pickerColor = Color(0xff443a49);
+  Color currentColor = Color(0xff443a49);
 
   bool _usedDefaultDate = true;
 
@@ -140,6 +144,38 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
     });
     return time;
   }
+
+  Future<void> presentColorPicker(context) {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Pick a color!'),
+          content: SingleChildScrollView(
+            child: BlockPicker(
+              pickerColor: currentColor,
+              onColorChanged: changeColor,
+            ),
+          ),
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text('Got it'),
+              onPressed: () {
+                setState(() => currentColor = pickerColor);
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void changeColor(Color color) {
+    setState(() => pickerColor = color);
+  }
+
+// raise the [showDialog] widget
 
   void _presentStartTimePicker() async {
     _selectedStartTime = await time_picker_func(
@@ -262,7 +298,6 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                               color: Theme.of(context).primaryColor)),
                     ),
                     controller: _descriptionController,
-                    keyboardType: TextInputType.number,
                     onSubmitted: (_) => _usedDefaultDate ? null : _submitData(),
                     // onChanged: (val) => amountInput = val,
                   ),
