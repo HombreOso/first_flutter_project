@@ -11,6 +11,7 @@ class ScheduledTask {
   var description;
   var uid;
   var id;
+  int? displayedColor;
 
   ScheduledTask(
       {required this.name,
@@ -22,25 +23,26 @@ class ScheduledTask {
       required this.priority,
       required this.description,
       required this.uid,
-      required this.id});
+      required this.id,
+      required this.displayedColor});
 
   factory ScheduledTask.fromMap(Map<String, dynamic> map) {
     return ScheduledTask(
-      name: map['name'],
-      start_datetime_planned:
-          DateTime.fromMillisecondsSinceEpoch(map['start_datetime_planned']),
-      end_datetime_planned:
-          DateTime.fromMillisecondsSinceEpoch(map['end_datetime_planned']),
-      start_datetime_as_is:
-          DateTime.fromMillisecondsSinceEpoch(map['start_datetime_as_is']),
-      end_datetime_as_is:
-          DateTime.fromMillisecondsSinceEpoch(map['end_datetime_as_is']),
-      is_canceled: map['is_canceled'],
-      priority: map['priority'],
-      description: map['description'],
-      uid: map['uid'],
-      id: map['id'],
-    );
+        name: map['name'],
+        start_datetime_planned:
+            DateTime.fromMillisecondsSinceEpoch(map['start_datetime_planned']),
+        end_datetime_planned:
+            DateTime.fromMillisecondsSinceEpoch(map['end_datetime_planned']),
+        start_datetime_as_is:
+            DateTime.fromMillisecondsSinceEpoch(map['start_datetime_as_is']),
+        end_datetime_as_is:
+            DateTime.fromMillisecondsSinceEpoch(map['end_datetime_as_is']),
+        is_canceled: map['is_canceled'],
+        priority: map['priority'],
+        description: map['description'],
+        uid: map['uid'],
+        id: map['id'],
+        displayedColor: map['displayed_color']);
   }
 
   Map<String, dynamic> toMap() {
@@ -55,6 +57,7 @@ class ScheduledTask {
       'description': description,
       'uid': uid,
       'id': id,
+      'displayed_color': displayedColor,
     };
   }
 
@@ -62,20 +65,20 @@ class ScheduledTask {
       DocumentSnapshot<Map<String, dynamic>> snapshot) {
     final data = snapshot.data();
     return ScheduledTask(
-      name: data!['name'] as String,
-      start_datetime_planned:
-          DateTime.fromMillisecondsSinceEpoch(data['start_datetime_planned']),
-      end_datetime_planned:
-          DateTime.fromMillisecondsSinceEpoch(data['end_datetime_planned']),
-      start_datetime_as_is:
-          DateTime.fromMillisecondsSinceEpoch(data['start_datetime_as_is']),
-      end_datetime_as_is:
-          DateTime.fromMillisecondsSinceEpoch(data['end_datetime_as_is']),
-      is_canceled: data['is_canceled'] as bool?,
-      priority: data['priority'] as String?,
-      description: data['description'] as String?,
-      uid: data['uid'] as String?,
-      id: data['id'] as String?,
-    );
+        name: data!['name'] as String,
+        start_datetime_planned:
+            DateTime.fromMillisecondsSinceEpoch(data['start_datetime_planned']),
+        end_datetime_planned:
+            DateTime.fromMillisecondsSinceEpoch(data['end_datetime_planned']),
+        start_datetime_as_is:
+            DateTime.fromMillisecondsSinceEpoch(data['start_datetime_as_is']),
+        end_datetime_as_is:
+            DateTime.fromMillisecondsSinceEpoch(data['end_datetime_as_is']),
+        is_canceled: data['is_canceled'] as bool?,
+        priority: data['priority'] as String?,
+        description: data['description'] as String?,
+        uid: data['uid'] as String?,
+        id: data['id'] as String?,
+        displayedColor: data['displayed_color'] as int?);
   }
 }

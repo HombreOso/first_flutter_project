@@ -23,9 +23,6 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   // colors to choose from for appointemnts, meetings
 
-  static final CollectionReference tasksCollectionRef =
-      FirebaseFirestore.instance.collection('tasks');
-
   List<Color> colors_list = [
     Color(0xFFEF9A9A),
     Color(0xFFE57373),
@@ -169,52 +166,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ],
           );
         });
-  }
-
-  // -------------------------------------
-
-  Future<void> _addNewScheduledTask(
-    String tskName,
-    DateTime tskStartDatetimePlanned,
-    DateTime tskEndDatetimePlanned,
-    DateTime tskStartDatetimeAsIs,
-    DateTime tskEndDatetimeAsIs,
-    bool tskIsCanceled,
-    Priority_Enum tskPriority,
-    String tskDescription,
-    String tskUid,
-    String tskId,
-  ) async {
-    final newTsk = ScheduledTask(
-      name: tskName,
-      start_datetime_planned: tskStartDatetimePlanned,
-      end_datetime_planned: tskEndDatetimePlanned,
-      start_datetime_as_is: tskStartDatetimeAsIs,
-      end_datetime_as_is: tskEndDatetimeAsIs,
-      is_canceled: tskIsCanceled,
-      priority: tskPriority,
-      description: tskDescription,
-      uid: uid,
-      id: tskId,
-    );
-    setState(() {
-      _userScheduledTasks.add(newTsk);
-    });
-    // Write the transaction to Firebase
-    await tasksCollectionRef.add({
-      'name': tskName,
-      'start_datetime_planned': tskStartDatetimePlanned,
-      'end_datetime_planned': tskEndDatetimePlanned,
-      'start_datetime_planned_clear': tskStartDatetimePlanned,
-      'end_datetime_planned_clear': tskEndDatetimePlanned,
-      'start_datetime_as_is': tskStartDatetimeAsIs,
-      'end_datetime_as_is': tskEndDatetimeAsIs,
-      'is_canceled': tskIsCanceled,
-      'priority': tskPriority,
-      'description': tskDescription,
-      'uid': uid,
-      'id': tskId,
-    });
   }
 
   List<Meeting> _getDataSource(List<ScheduledTask> tasks) {

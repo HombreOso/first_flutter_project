@@ -33,6 +33,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     String? tskDescription,
     String? tskUid,
     String? tskId,
+    int? tskDisplayedColor,
   ) async {
     final newTsk = ScheduledTask(
       name: tskName,
@@ -45,6 +46,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       description: tskDescription,
       uid: uid,
       id: tskId,
+      displayedColor: tskDisplayedColor,
     );
     setState(() {
       _userScheduledTasks.add(newTsk);
@@ -63,17 +65,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       'description': tskDescription,
       'uid': uid,
       'id': tskId,
+      'displayed_color': tskDisplayedColor,
     });
-  }
-
-  List<Meeting> _getDataSource() {
-    final List<Meeting> meetings = <Meeting>[];
-    final DateTime today = DateTime.now();
-    final DateTime startTime = DateTime(today.year, today.month, today.day, 9);
-    final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting(
-        'Conference', startTime, endTime, const Color(0xFFF48FB1), false));
-    return meetings;
   }
 
   @override

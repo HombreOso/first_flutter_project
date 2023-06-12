@@ -93,6 +93,8 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
         convertTimeOfDayToDoubleFormatHours(_selectedStartTime!)) {
       return;
     }
+
+    print("Current color value: ${currentColor.value}");
     widget.addTsk(
       tskName,
       tskCategory,
@@ -105,6 +107,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       tskDescription,
       tskUid,
       tskId,
+      currentColor.value,
     );
 
     Navigator.of(context).pop();
@@ -422,6 +425,35 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                     ),
                   ],
                 ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ElevatedButton.icon(
+                icon: Icon(
+                  Icons.color_lens,
+                  color: currentColor,
+                ),
+                label: Text(
+                  'Pick a Color',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(
+                        Theme.of(context).secondaryHeaderColor),
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).canvasColor),
+                    textStyle: MaterialStateProperty.all(Theme.of(context)
+                        .textTheme
+                        .labelLarge!
+                        .copyWith(color: Colors.white)),
+                    // padding: MaterialStateProperty.all(
+                    //   EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    // ),
+                    alignment: Alignment.center),
+                onPressed: () => presentColorPicker(context),
               ),
               SizedBox(
                 height: 10,
