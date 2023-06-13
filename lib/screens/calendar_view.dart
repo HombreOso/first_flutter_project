@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'package:flutter/material.dart';
@@ -32,11 +33,170 @@ class _CalendarScreenState extends State<CalendarScreen> {
         .toList();
   }
 
+  final CalendarController _controller = CalendarController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.grey,
+        foregroundColor: Theme.of(context).primaryColor,
+        title: Text(
+          'Calendar',
+        ),
+        actions: <Widget>[
+          DropdownButton2(
+            isExpanded: true,
+            alignment: Alignment.centerRight,
+            underline: Container(),
+            dropdownStyleData: DropdownStyleData(
+              width: 200,
+            ),
+            buttonStyleData: ButtonStyleData(
+              width: 80,
+            ),
+            iconStyleData: IconStyleData(
+              //iconSize: 30,
+              icon: Icon(
+                Icons.view_week,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            items: [
+              DropdownMenuItem(
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.exit_to_app,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      SizedBox(width: 8),
+                      Text('Day'),
+                    ],
+                  ),
+                ),
+                value: 'day_view',
+              ),
+              DropdownMenuItem(
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.featured_play_list_outlined,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      SizedBox(width: 8),
+                      Text('Week'),
+                    ],
+                  ),
+                ),
+                value: 'week_view',
+              ),
+              DropdownMenuItem(
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.calendar_today,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      SizedBox(width: 8),
+                      Text('Month'),
+                    ],
+                  ),
+                ),
+                value: 'month_view',
+              ),
+            ],
+            onChanged: (itemIdentifier) {
+              if (itemIdentifier == 'day_view') {
+                _controller.view = CalendarView.day;
+              } else if (itemIdentifier == 'week_view') {
+                _controller.view = CalendarView.week;
+              } else if (itemIdentifier == 'month_view') {
+                _controller.view = CalendarView.month;
+              }
+            },
+          ),
+          DropdownButton2(
+            isExpanded: true,
+            alignment: Alignment.centerRight,
+            underline: Container(),
+            dropdownStyleData: DropdownStyleData(
+              width: 200,
+            ),
+            buttonStyleData: ButtonStyleData(
+              width: 80,
+            ),
+            iconStyleData: IconStyleData(
+              //iconSize: 30,
+              icon: Icon(
+                Icons.more_vert,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            items: [
+              DropdownMenuItem(
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.exit_to_app,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      SizedBox(width: 8),
+                      Text('Logout'),
+                    ],
+                  ),
+                ),
+                value: 'logout',
+              ),
+              DropdownMenuItem(
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.featured_play_list_outlined,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      SizedBox(width: 8),
+                      Text('My Categories'),
+                    ],
+                  ),
+                ),
+                value: 'categories',
+              ),
+              DropdownMenuItem(
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.calendar_today,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      SizedBox(width: 8),
+                      Text('Calendar'),
+                    ],
+                  ),
+                ),
+                value: 'calendar',
+              ),
+            ],
+            onChanged: (itemIdentifier) {
+              if (itemIdentifier == 'logout') {
+                FirebaseAuth.instance.signOut();
+              } else if (itemIdentifier == 'categories') {
+                Navigator.pushNamed(context, '/categories');
+              } else if (itemIdentifier == 'calendar') {
+                Navigator.pushNamed(context, '/calendar');
+              }
+            },
+          ),
+        ],
+      ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 30, bottom: 15),
+        padding: const EdgeInsets.only(top: 0, bottom: 15),
         child: StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance.collection('tasks').snapshots(),
             builder: (context, snapshot) {
@@ -58,6 +218,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               });
               return SfCalendar(
                 view: CalendarView.week,
+                controller: _controller,
                 dataSource: MeetingDataSource(_getDataSource(loadedTasks)),
                 // by default the month appointment display mode set as Indicator, we can
                 // change the display mode as appointment using the appointment display
