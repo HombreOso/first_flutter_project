@@ -11,7 +11,7 @@ class ScheduledTask {
   var description;
   var uid;
   var id;
-  int? displayedColor;
+  int displayedColor;
 
   ScheduledTask(
       {required this.name,
@@ -79,6 +79,6 @@ class ScheduledTask {
         description: data['description'] as String?,
         uid: data['uid'] as String?,
         id: data['id'] as String?,
-        displayedColor: data['displayed_color'] as int?);
+        displayedColor: data['displayed_color'] as int);
   }
 }

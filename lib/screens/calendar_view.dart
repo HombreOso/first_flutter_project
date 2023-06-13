@@ -173,7 +173,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
     tasks.forEach((element) {
       meetings.add(Meeting(element.name, element.start_datetime_planned,
-          element.end_datetime_planned, Color(0xFFF48FB1), false));
+          element.end_datetime_planned, Color(element.displayedColor), false));
     });
     return meetings;
   }

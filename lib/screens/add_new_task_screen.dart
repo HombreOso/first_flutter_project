@@ -33,7 +33,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     String? tskDescription,
     String? tskUid,
     String? tskId,
-    int? tskDisplayedColor,
+    int tskDisplayedColor,
   ) async {
     final newTsk = ScheduledTask(
       name: tskName,
