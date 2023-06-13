@@ -372,7 +372,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                               ? _selectedStartTime!.hour
                               : TimeOfDay.now().hour,
                           _selectedStartTime != null
-                              ? _selectedStartTime!.hour
+                              ? _selectedStartTime!.minute
                               : TimeOfDay.now().minute,
                         ))}',
                       ),
@@ -412,7 +412,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                               ? _selectedEndTime!.hour
                               : TimeOfDay.now().hour,
                           _selectedEndTime != null
-                              ? _selectedEndTime!.hour
+                              ? _selectedEndTime!.minute
                               : TimeOfDay.now().minute,
                         ))}',
                       ),
