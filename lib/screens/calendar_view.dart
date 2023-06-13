@@ -19,15 +19,6 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
-  // colors to choose from for appointemnts, meetings
-
-  List<Color> colors_list = [
-    Color(0xFFEF9A9A),
-    Color(0xFFE57373),
-    Color(0xFFEF5350),
-    Color(0xFFF48FB1),
-  ];
-
   void _startAddNewTask(BuildContext ctx) {
     Navigator.pushNamed(context, '/new_task');
   }
@@ -83,17 +74,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           backgroundColor: Theme.of(context).canvasColor,
           foregroundColor: Theme.of(context).primaryColor,
           child: Icon(Icons.add),
-          onPressed: () => _startAddNewTask(context)
-
-          // time_picker_func(
-          //       TimeOfDay.now(),
-          //       TimePickerEntryMode.dial,
-          //       Orientation.portrait,
-          //       MaterialTapTargetSize.padded,
-          //       context,
-          //     )
-
-          ),
+          onPressed: () => _startAddNewTask(context)),
     );
   }
 
