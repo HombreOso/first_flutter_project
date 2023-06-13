@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_complete_guide/widgets/new_scheduled_task.dart';
 
-import '../models/meeting_class.dart';
 import '../models/scheduled_task.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';

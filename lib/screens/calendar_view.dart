@@ -8,8 +8,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../models/meeting_class.dart';
 import '../models/scheduled_task.dart';
 
-import '../models/priority_enum.dart';
-
 /// The hove page which hosts the calendar
 class CalendarScreen extends StatefulWidget {
   /// Creates the home page to display teh calendar widget.
@@ -98,8 +96,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
           ),
     );
   }
-
-  List<ScheduledTask> _userScheduledTasks = [];
 
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
