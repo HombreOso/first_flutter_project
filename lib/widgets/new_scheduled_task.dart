@@ -188,8 +188,9 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       MaterialTapTargetSize.padded,
       context,
     );
-    tskStartDatetimePlanned =
-        convertTimeOfDayToDateTime(_selectedStartTime, _selectedDate);
+
+    tskStartDatetimePlanned = convertTimeOfDayToDateTime(
+        _selectedStartTime ?? TimeOfDay.now(), _selectedDate);
     print(tskStartDatetimePlanned.toString());
   }
 
@@ -201,8 +202,8 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       MaterialTapTargetSize.padded,
       context,
     );
-    tskEndDatetimePlanned =
-        convertTimeOfDayToDateTime(_selectedEndTime, _selectedDate);
+    tskEndDatetimePlanned = convertTimeOfDayToDateTime(
+        _selectedEndTime ?? TimeOfDay.now(), _selectedDate);
   }
 
   void _presentDatePicker() {
@@ -367,8 +368,12 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                           DateTime.now().year,
                           DateTime.now().month,
                           DateTime.now().day,
-                          _selectedStartTime!.hour,
-                          _selectedStartTime!.minute,
+                          _selectedStartTime != null
+                              ? _selectedStartTime!.hour
+                              : TimeOfDay.now().hour,
+                          _selectedStartTime != null
+                              ? _selectedStartTime!.hour
+                              : TimeOfDay.now().minute,
                         ))}',
                       ),
                     ),
@@ -403,8 +408,12 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
                           DateTime.now().year,
                           DateTime.now().month,
                           DateTime.now().day,
-                          _selectedEndTime!.hour,
-                          _selectedEndTime!.minute,
+                          _selectedEndTime != null
+                              ? _selectedEndTime!.hour
+                              : TimeOfDay.now().hour,
+                          _selectedEndTime != null
+                              ? _selectedEndTime!.hour
+                              : TimeOfDay.now().minute,
                         ))}',
                       ),
                     ),
