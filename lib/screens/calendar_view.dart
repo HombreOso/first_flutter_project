@@ -108,6 +108,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ),
                 value: 'month_view',
               ),
+              DropdownMenuItem(
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.calendar_today,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      SizedBox(width: 8),
+                      Text('Schedule'),
+                    ],
+                  ),
+                ),
+                value: 'schedule_view',
+              ),
             ],
             onChanged: (itemIdentifier) {
               if (itemIdentifier == 'day_view') {
@@ -116,6 +131,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 _controller.view = CalendarView.week;
               } else if (itemIdentifier == 'month_view') {
                 _controller.view = CalendarView.month;
+              } else if (itemIdentifier == 'schedule_view') {
+                _controller.view = CalendarView.schedule;
               }
             },
           ),
