@@ -4,10 +4,14 @@ import 'dart:ui';
 /// information about the event data which will be rendered in calendar.
 class Meeting {
   /// Creates a meeting class with required details.
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+  Meeting(this.eventName, this.tskId, this.from, this.to, this.background,
+      this.isAllDay);
 
   /// Event name which is equivalent to subject property of [Appointment].
   String eventName;
+
+  /// Id of the task
+  String tskId;
 
   /// From which is equivalent to start time property of [Appointment].
   DateTime from;

@@ -2,13 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../models/scheduled_task.dart';
 
-class FavoriteMealsNotifier extends StateNotifier<List<ScheduledTask>> {
-  FavoriteMealsNotifier() : super([]);
+class ScheduledTasksNotifier extends StateNotifier<List<ScheduledTask>> {
+  ScheduledTasksNotifier() : super([]);
 
-  bool toggleMealFavoriteStatus(ScheduledTask scheduledTask) {
-    final scheduledTaskIsFavorite = state.contains(scheduledTask);
+  bool toggleScheduledTasksStatus(ScheduledTask scheduledTask) {
+    final scheduledTaskIs = state.contains(scheduledTask);
 
-    if (scheduledTaskIsFavorite) {
+    if (scheduledTaskIs) {
       state = state.where((m) => m.id != scheduledTask.id).toList();
       return false;
     } else {
@@ -18,7 +18,7 @@ class FavoriteMealsNotifier extends StateNotifier<List<ScheduledTask>> {
   }
 }
 
-final favoriteMealsProvider =
-    StateNotifierProvider<FavoriteMealsNotifier, List<ScheduledTask>>((ref) {
-  return FavoriteMealsNotifier();
+final scheduledTasksProvider =
+    StateNotifierProvider<ScheduledTasksNotifier, List<ScheduledTask>>((ref) {
+  return ScheduledTasksNotifier();
 });

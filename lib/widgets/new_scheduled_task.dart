@@ -81,6 +81,8 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
   void _submitData() {
     final tskDescription = _descriptionController.text;
 
+    final tskId = DateTime.now().toString();
+
     if (_descriptionController.text.isEmpty) {
       return;
     }

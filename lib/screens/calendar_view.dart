@@ -270,7 +270,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         details.targetElement == CalendarElement.agenda) {
       final Meeting appointmentDetails = details.appointments![0];
       _subjectText = appointmentDetails.eventName;
-      _dateText = 'lala';
+      _dateText = appointmentDetails.tskId;
       _startTimeText = 'lala';
       _endTimeText = 'lala';
       _timeDetails = '$_startTimeText - $_endTimeText';
@@ -314,10 +314,16 @@ class _CalendarScreenState extends State<CalendarScreen> {
             ),
             actions: <Widget>[
               TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Close'),
+              ),
+              TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('Close'))
+                  child: Text('Update'))
             ],
           );
         });
@@ -327,8 +333,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
     final List<Meeting> meetings = <Meeting>[];
 
     tasks.forEach((element) {
-      meetings.add(Meeting(element.name, element.start_datetime_planned,
-          element.end_datetime_planned, Color(element.displayedColor), false));
+      meetings.add(Meeting(
+          element.name,
+          element.id,
+          element.start_datetime_planned,
+          element.end_datetime_planned,
+          Color(element.displayedColor),
+          false));
     });
     return meetings;
   }
