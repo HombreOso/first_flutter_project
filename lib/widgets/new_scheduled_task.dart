@@ -15,6 +15,11 @@ class NewScheduledTask extends StatefulWidget {
   final String initialDescription;
   final String txDateIdAsString;
   final DateTime txDate;
+  final Priority_Enum tskPriority;
+  final Category tskCategory;
+  final DateTime tskStartTimePlanned;
+  final DateTime tskEndTimePlanned;
+  final int displayedColor;
 
   NewScheduledTask(
     this.addTsk,
@@ -22,6 +27,11 @@ class NewScheduledTask extends StatefulWidget {
     this.initialDescription,
     this.txDateIdAsString,
     this.txDate,
+    this.tskPriority,
+    this.tskCategory,
+    this.tskStartTimePlanned,
+    this.tskEndTimePlanned,
+    this.displayedColor,
   );
 
   @override

@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/models/category.dart';
+import 'package:flutter_complete_guide/models/priority_enum.dart';
 import 'package:flutter_complete_guide/widgets/new_scheduled_task.dart';
 
 import '../models/scheduled_task.dart';
@@ -70,7 +72,20 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return NewScheduledTask(_addNewScheduledTask, "", "",
-        DateTime.now().toString(), DateTime.now());
+    return NewScheduledTask(
+        _addNewScheduledTask,
+        "",
+        "",
+        DateTime.now().toString(),
+        DateTime.now(),
+        Priority_Enum.Normal,
+        Category(
+            amount: 1,
+            id: DateTime.now().toString(),
+            name: "Mock",
+            uid: "Mock"),
+        DateTime.now(),
+        DateTime.now(),
+        256);
   }
 }
