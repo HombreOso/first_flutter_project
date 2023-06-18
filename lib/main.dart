@@ -12,6 +12,7 @@ import 'screens/calendar_view.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +31,7 @@ void main() {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return MyApp();
+          return ProviderScope(child: MyApp());
         }
 
         // Otherwise, show a loading indicator
