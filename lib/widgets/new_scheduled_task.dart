@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter_complete_guide/models/category.dart';
+import 'package:flutter_complete_guide/models/scheduled_task.dart';
 import 'package:intl/intl.dart' as intl_package;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,11 +17,7 @@ class NewScheduledTask extends StatefulWidget {
   final String initialDescription;
   final String txDateIdAsString;
   final DateTime txDate;
-  final Priority_Enum tskPriority;
-  final Category tskCategory;
-  final DateTime tskStartTimePlanned;
-  final DateTime tskEndTimePlanned;
-  final int displayedColor;
+  final String? tskId;
 
   NewScheduledTask(
     this.addTsk,
@@ -27,11 +25,7 @@ class NewScheduledTask extends StatefulWidget {
     this.initialDescription,
     this.txDateIdAsString,
     this.txDate,
-    this.tskPriority,
-    this.tskCategory,
-    this.tskStartTimePlanned,
-    this.tskEndTimePlanned,
-    this.displayedColor,
+    this.tskId,
   );
 
   @override
@@ -52,6 +46,17 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
   String? tskDescription;
   String? tskUid;
   String? tskId;
+
+  String uid = FirebaseAuth.instance.currentUser!.uid.toString();
+
+  Future<ScheduledTask> get upToDatedTask async {
+    final snapshot = await FirebaseFirestore.instance.collection('tasks').get();
+    return await snapshot.docs
+        .map((doc) => ScheduledTask.fromMap(doc.data()))
+        .toList()
+        .where((tsk) => tsk.uid == uid && tsk.id == widget.tskId)
+        .first;
+  }
 
   @override
   void initState() {

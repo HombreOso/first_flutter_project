@@ -9,10 +9,13 @@ import '../models/scheduled_task.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddTaskScreen extends StatefulWidget {
+  final String? tskId;
   // String titleInput;
   // String amountInput;
   @override
   _AddTaskScreenState createState() => _AddTaskScreenState();
+
+  AddTaskScreen({required this.tskId});
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
@@ -72,20 +75,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return NewScheduledTask(
-        _addNewScheduledTask,
-        "",
-        "",
-        DateTime.now().toString(),
-        DateTime.now(),
-        Priority_Enum.Normal,
-        Category(
-            amount: 1,
-            id: DateTime.now().toString(),
-            name: "Mock",
-            uid: "Mock"),
-        DateTime.now(),
-        DateTime.now(),
-        256);
+    return NewScheduledTask(_addNewScheduledTask, "", "",
+        DateTime.now().toString(), DateTime.now(), widget.tskId);
   }
 }

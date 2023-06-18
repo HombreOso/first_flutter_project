@@ -1,0 +1,24 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../models/scheduled_task.dart';
+
+class TaskIdNotifier extends StateNotifier<List<ScheduledTask>> {
+  TaskIdNotifier() : super([]);
+
+  bool toggleTaskIdStatus(String taskId) {
+    final scheduledTaskIs = state.contains(scheduledTask);
+
+    if (scheduledTaskIs) {
+      state = state.where((m) => m.id != scheduledTask.id).toList();
+      return false;
+    } else {
+      state = [...state, scheduledTask];
+      return true;
+    }
+  }
+}
+
+final scheduledTasksProvider =
+    StateNotifierProvider<TaskIdNotifier, List<ScheduledTask>>((ref) {
+  return TaskIdNotifier();
+});

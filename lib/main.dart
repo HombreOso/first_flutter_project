@@ -84,7 +84,6 @@ class MyApp extends StatelessWidget {
         '/reset_password': (context) => ResetPasswordScreen(),
         '/confirm_email': (context) => EmailVerificationScreen(),
         '/calendar': (context) => CalendarScreen(),
-        '/new_task': (context) => AddTaskScreen(),
       },
       home: StreamBuilder(
           stream: FirebaseAuth.instance.authStateChanges(),

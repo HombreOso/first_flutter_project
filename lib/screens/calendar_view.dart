@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter_complete_guide/screens/add_new_task_screen.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'package:flutter/material.dart';
@@ -20,8 +21,14 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
-  void _startAddNewTask(BuildContext ctx) {
-    Navigator.pushNamed(context, '/new_task');
+  void _startAddNewTask(BuildContext ctx, String? tskId) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AddTaskScreen(
+            tskId: tskId,
+          ),
+        ));
   }
 
   Future<List<ScheduledTask>> get listOfTasks async {
@@ -252,7 +259,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           backgroundColor: Theme.of(context).canvasColor,
           foregroundColor: Theme.of(context).primaryColor,
           child: Icon(Icons.add),
-          onPressed: () => _startAddNewTask(context)),
+          onPressed: () => _startAddNewTask(context, null)),
     );
   }
 
