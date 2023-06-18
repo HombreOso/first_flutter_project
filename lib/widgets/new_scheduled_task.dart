@@ -49,7 +49,7 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
 
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
-  Future<ScheduledTask> get upToDatedTask async {
+  Future<ScheduledTask> get tappedTask async {
     final snapshot = await FirebaseFirestore.instance.collection('tasks').get();
     return await snapshot.docs
         .map((doc) => ScheduledTask.fromMap(doc.data()))
@@ -61,9 +61,10 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
   @override
   void initState() {
     super.initState();
+    print("widget.initialTitleText: ${widget.initialTitleText}");
     _tskNameController = TextEditingController(text: widget.initialTitleText);
     _descriptionController =
-        TextEditingController(text: widget.initialTitleText);
+        TextEditingController(text: widget.initialDescription);
   }
 
   // final _tskNameController = TextEditingController();
@@ -98,9 +99,6 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
 
     final tskId = DateTime.now().toString();
 
-    if (_descriptionController.text.isEmpty) {
-      return;
-    }
     final tskName = _tskNameController.text;
 
     if (tskName.isEmpty) {

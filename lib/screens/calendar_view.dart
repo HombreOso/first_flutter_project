@@ -26,7 +26,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         context,
         MaterialPageRoute(
           builder: (context) => AddTaskScreen(
-            tskId: tskId,
+            tskIdtapped: tskId,
           ),
         ));
   }
@@ -328,7 +328,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
               TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    _startAddNewTask(context, _dateText);
                   },
                   child: Text('Update'))
             ],
