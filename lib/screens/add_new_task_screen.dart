@@ -25,7 +25,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       FirebaseFirestore.instance.collection('tasks');
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
 
-  Future<ScheduledTask> get tappedTask async {
+  Future<ScheduledTask>? get tappedTask async {
     final snapshot = await FirebaseFirestore.instance.collection('tasks').get();
     return await snapshot.docs
         .map((doc) => ScheduledTask.fromMap(doc.data()))
@@ -84,35 +84,24 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.tskIdtapped != null) {
-      tappedTask.then((tTask) {
-        DateTime tskStartDatetimePlanned = tTask.start_datetime_planned;
-        //tskCategory = tTask.;
-        DateTime tskEndDatetimePlanned = tTask.end_datetime_planned;
-        //hour: TimeOfDay.now().hour + 1, minute: TimeOfDay.now().minute
-        DateTime tskStartDatetimeAsIs = tTask.start_datetime_as_is;
-        DateTime tskEndDatetimeAsIs = tTask.end_datetime_as_is;
-        bool? tskIsCanceled = tTask.is_canceled;
-        String tskPriorityName = tTask.priority;
-        String tskDescription = tTask.description;
-        String tskUid = tTask.uid;
-        print("tapped on a task");
-        print("task name: ${tTask.name}");
-        print("task description: ${tTask.description}");
-        return NewScheduledTask(
-            _addNewScheduledTask,
-            tTask.name,
-            tTask.description,
-            DateTime.now().toString(),
-            DateTime.now(),
-            widget.tskIdtapped);
-      }).onError((error, stackTrace) {
-        return NewScheduledTask(_addNewScheduledTask, "", "",
+    return widget.tskIdtapped != null
+        ? FutureBuilder<ScheduledTask>(
+            future: tappedTask,
+            builder: (context, AsyncSnapshot<dynamic> snapshot) {
+              if (snapshot.hasData) {
+                return NewScheduledTask(
+                    _addNewScheduledTask,
+                    snapshot.data!.name,
+                    snapshot.data.description,
+                    DateTime.now().toString(),
+                    DateTime.now(),
+                    widget.tskIdtapped);
+              } else {
+                return CircularProgressIndicator();
+              }
+            })
+        : NewScheduledTask(_addNewScheduledTask, "", "",
             DateTime.now().toString(), DateTime.now(), widget.tskIdtapped);
-      });
-    }
-
-    return NewScheduledTask(_addNewScheduledTask, "", "",
-        DateTime.now().toString(), DateTime.now(), widget.tskIdtapped);
+    ;
   }
 }
