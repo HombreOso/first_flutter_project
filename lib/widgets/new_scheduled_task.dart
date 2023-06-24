@@ -40,9 +40,9 @@ class NewScheduledTask extends ConsumerStatefulWidget {
 class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
   var _descriptionController;
   var _tskNameController;
-  DateTime tskStartDatetimePlanned = DateTime.now();
+  var tskStartDatetimePlanned;
   String tskCategory = "Job";
-  DateTime tskEndDatetimePlanned = DateTime.now().add(Duration(hours: 3));
+  var tskEndDatetimePlanned;
   //hour: TimeOfDay.now().hour + 1, minute: TimeOfDay.now().minute
   DateTime tskStartDatetimeAsIs = DateTime.now();
   DateTime tskEndDatetimeAsIs = DateTime.now().add(Duration(hours: 3));
@@ -66,6 +66,8 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
   @override
   void initState() {
     super.initState();
+    DateTime tskStartDatetimePlanned = widget.tskInitialStartDateTime;
+    DateTime tskEndDatetimePlanned = widget.tskInitialStartDateTime;
     print("widget.initialTitleText: ${widget.initialTitleText}");
     _tskNameController = TextEditingController(text: widget.initialTitleText);
     _descriptionController =
@@ -263,8 +265,8 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
       widget.updateTsk(
         tskName,
         tskCategory,
-        tskStartDatetimePlanned,
-        tskEndDatetimePlanned,
+        tskStartDatetimePlanned ?? widget.tskInitialStartDateTime,
+        tskEndDatetimePlanned ?? widget.tskInitialEndDateTime,
         tskStartDatetimeAsIs,
         tskEndDatetimeAsIs,
         tskIsCanceled,
