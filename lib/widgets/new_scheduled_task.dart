@@ -19,8 +19,8 @@ class NewScheduledTask extends ConsumerStatefulWidget {
   final Function updateTsk;
   final String initialTitleText;
   final String initialDescription;
-  final String txDateIdAsString;
-  final DateTime txDate;
+  final DateTime tskInitialStartDateTime;
+  final DateTime tskInitialEndDateTime;
   final String? tskId;
 
   NewScheduledTask(
@@ -28,8 +28,8 @@ class NewScheduledTask extends ConsumerStatefulWidget {
     this.updateTsk,
     this.initialTitleText,
     this.initialDescription,
-    this.txDateIdAsString,
-    this.txDate,
+    this.tskInitialStartDateTime,
+    this.tskInitialEndDateTime,
     this.tskId,
   );
 
@@ -99,11 +99,11 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
     );
   }
 
-  Future<TimeOfDay?> time_picker_func(
-      selectedTime, entryMode, orientation, tapTargetSize, ctx) async {
+  Future<TimeOfDay?> time_picker_func(selectedTime, entryMode, orientation,
+      tapTargetSize, ctx, initialTime) async {
     TimeOfDay? time = await showTimePicker(
       context: ctx,
-      initialTime: selectedTime ?? TimeOfDay.now(),
+      initialTime: initialTime,
       initialEntryMode: entryMode,
       orientation: orientation,
       builder: (BuildContext context, Widget? child) {
@@ -173,10 +173,17 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
       Orientation.portrait,
       MaterialTapTargetSize.padded,
       context,
+      TimeOfDay(
+          hour: widget.tskInitialStartDateTime.hour,
+          minute: widget.tskInitialStartDateTime.minute),
     );
 
     tskStartDatetimePlanned = convertTimeOfDayToDateTime(
-        _selectedStartTime ?? TimeOfDay.now(), _selectedDate);
+        _selectedStartTime ??
+            TimeOfDay(
+                hour: widget.tskInitialStartDateTime.hour,
+                minute: widget.tskInitialStartDateTime.minute),
+        _selectedDate);
     print(tskStartDatetimePlanned.toString());
   }
 
@@ -187,17 +194,24 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
       Orientation.portrait,
       MaterialTapTargetSize.padded,
       context,
+      TimeOfDay(
+          hour: widget.tskInitialEndDateTime.hour,
+          minute: widget.tskInitialEndDateTime.minute),
     );
     tskEndDatetimePlanned = convertTimeOfDayToDateTime(
-        _selectedEndTime ?? TimeOfDay.now(), _selectedDate);
+        _selectedEndTime ??
+            TimeOfDay(
+                hour: widget.tskInitialEndDateTime.hour,
+                minute: widget.tskInitialEndDateTime.minute),
+        _selectedDate);
   }
 
   void _presentDatePicker() {
     showDatePicker(
       context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2023),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      initialDate: widget.tskInitialStartDateTime,
+      firstDate: DateTime(DateTime.now().year),
+      lastDate: DateTime(DateTime.now().year).add(Duration(days: 365)),
     ).then((pickedDate) {
       if (pickedDate == null) {
         setState(() {
@@ -376,7 +390,7 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        'Picked Date: ${intl_package.DateFormat.yMd().format(_selectedDate)}',
+                        'Picked Date: ${intl_package.DateFormat.yMd().format(widget.tskInitialStartDateTime)}',
                       ),
                     ),
                     TextButton(
@@ -410,12 +424,8 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
                           DateTime.now().year,
                           DateTime.now().month,
                           DateTime.now().day,
-                          _selectedStartTime != null
-                              ? _selectedStartTime!.hour
-                              : TimeOfDay.now().hour,
-                          _selectedStartTime != null
-                              ? _selectedStartTime!.minute
-                              : TimeOfDay.now().minute,
+                          widget.tskInitialStartDateTime.hour,
+                          widget.tskInitialStartDateTime.minute,
                         ))}',
                       ),
                     ),
@@ -450,12 +460,8 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
                           DateTime.now().year,
                           DateTime.now().month,
                           DateTime.now().day,
-                          _selectedEndTime != null
-                              ? _selectedEndTime!.hour
-                              : TimeOfDay.now().hour,
-                          _selectedEndTime != null
-                              ? _selectedEndTime!.minute
-                              : TimeOfDay.now().minute,
+                          widget.tskInitialEndDateTime.hour,
+                          widget.tskInitialEndDateTime.minute,
                         ))}',
                       ),
                     ),

@@ -139,15 +139,15 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                     _updateScheduledTask,
                     snapshot.data!.name,
                     snapshot.data.description,
-                    DateTime.now().toString(),
-                    DateTime.now(),
+                    snapshot.data.start_datetime_planned,
+                    snapshot.data.end_datetime_planned,
                     widget.tskIdtapped);
               } else {
                 return CircularProgressIndicator();
               }
             })
         : NewScheduledTask(_addNewScheduledTask, _updateScheduledTask, "", "",
-            DateTime.now().toString(), DateTime.now(), widget.tskIdtapped);
+            DateTime.now(), DateTime.now(), widget.tskIdtapped);
     ;
   }
 }
