@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter_complete_guide/screens/add_new_task_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import 'package:flutter/material.dart';
@@ -10,8 +11,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../models/meeting_class.dart';
 import '../models/scheduled_task.dart';
 
+final isToUpdateProvider = StateProvider<bool>(
+  // We return the default sort type, here name.
+  (ref) => true,
+);
+
 /// The hove page which hosts the calendar
-class CalendarScreen extends StatefulWidget {
+class CalendarScreen extends ConsumerStatefulWidget {
   /// Creates the home page to display teh calendar widget.
   const CalendarScreen({Key? key}) : super(key: key);
 
@@ -20,7 +26,10 @@ class CalendarScreen extends StatefulWidget {
   _CalendarScreenState createState() => _CalendarScreenState();
 }
 
-class _CalendarScreenState extends State<CalendarScreen> {
+final CollectionReference tasksCollectionRef =
+    FirebaseFirestore.instance.collection('tasks');
+
+class _CalendarScreenState extends ConsumerState<CalendarScreen> {
   void _startAddNewTask(BuildContext ctx, String? tskId) {
     Navigator.push(
         context,
@@ -259,7 +268,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
           backgroundColor: Theme.of(context).canvasColor,
           foregroundColor: Theme.of(context).primaryColor,
           child: Icon(Icons.add),
-          onPressed: () => _startAddNewTask(context, null)),
+          onPressed: () {
+            ref.read(isToUpdateProvider.notifier).state = false;
+            _startAddNewTask(context, null);
+          }),
     );
   }
 
@@ -328,9 +340,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
               ),
               TextButton(
                   onPressed: () {
+                    ref.read(isToUpdateProvider.notifier).state = true;
+                    print(ref.read(isToUpdateProvider.notifier).state);
                     _startAddNewTask(context, _dateText);
                   },
-                  child: Text('Update'))
+                  child: Text('Copy'))
             ],
           );
         });

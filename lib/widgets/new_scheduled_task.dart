@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +12,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/priority_enum.dart';
 import 'dropdownExpenseCategories.dart';
 import 'dropdownPriority.dart';
+import '../screens/calendar_view.dart';
 
-class NewScheduledTask extends StatefulWidget {
+class NewScheduledTask extends ConsumerStatefulWidget {
   final Function addTsk;
+  final Function updateTsk;
   final String initialTitleText;
   final String initialDescription;
   final String txDateIdAsString;
@@ -21,6 +25,7 @@ class NewScheduledTask extends StatefulWidget {
 
   NewScheduledTask(
     this.addTsk,
+    this.updateTsk,
     this.initialTitleText,
     this.initialDescription,
     this.txDateIdAsString,
@@ -32,7 +37,7 @@ class NewScheduledTask extends StatefulWidget {
   _NewScheduledTaskState createState() => _NewScheduledTaskState();
 }
 
-class _NewScheduledTaskState extends State<NewScheduledTask> {
+class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
   var _descriptionController;
   var _tskNameController;
   DateTime tskStartDatetimePlanned = DateTime.now();
@@ -92,41 +97,6 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       timeOfDayToConvert!.hour,
       timeOfDayToConvert.minute,
     );
-  }
-
-  void _submitData() {
-    final tskDescription = _descriptionController.text;
-
-    final tskId = DateTime.now().toString();
-
-    final tskName = _tskNameController.text;
-
-    if (tskName.isEmpty) {
-      return;
-    }
-
-    if (convertTimeOfDayToDoubleFormatHours(_selectedEndTime!) <=
-        convertTimeOfDayToDoubleFormatHours(_selectedStartTime!)) {
-      return;
-    }
-
-    print("Current color value: ${currentColor.value}");
-    widget.addTsk(
-      tskName,
-      tskCategory,
-      tskStartDatetimePlanned,
-      tskEndDatetimePlanned,
-      tskStartDatetimeAsIs,
-      tskEndDatetimeAsIs,
-      tskIsCanceled,
-      tskPriorityName,
-      tskDescription,
-      tskUid,
-      tskId,
-      currentColor.value,
-    );
-
-    Navigator.of(context).pop();
   }
 
   Future<TimeOfDay?> time_picker_func(
@@ -252,6 +222,62 @@ class _NewScheduledTaskState extends State<NewScheduledTask> {
       }
     });
     print('...');
+  }
+
+  VoidCallback? _submitData() {
+    final tskDescription = _descriptionController.text;
+
+    final tskId = DateTime.now().toString();
+
+    final tskName = _tskNameController.text;
+
+    final isToBeUpdated = ref.watch(isToUpdateProvider);
+
+    print("isToBeUpdated $isToBeUpdated");
+
+    if (tskName.isEmpty) {
+      null;
+    }
+
+    if (convertTimeOfDayToDoubleFormatHours(_selectedEndTime!) <=
+        convertTimeOfDayToDoubleFormatHours(_selectedStartTime!)) {
+      null;
+    }
+
+    print("Current color value: ${currentColor.value}");
+    if (isToBeUpdated) {
+      widget.updateTsk(
+        tskName,
+        tskCategory,
+        tskStartDatetimePlanned,
+        tskEndDatetimePlanned,
+        tskStartDatetimeAsIs,
+        tskEndDatetimeAsIs,
+        tskIsCanceled,
+        tskPriorityName,
+        tskDescription,
+        tskUid,
+        tskId,
+        currentColor.value,
+      );
+    } else {
+      widget.addTsk(
+        tskName,
+        tskCategory,
+        tskStartDatetimePlanned,
+        tskEndDatetimePlanned,
+        tskStartDatetimeAsIs,
+        tskEndDatetimeAsIs,
+        tskIsCanceled,
+        tskPriorityName,
+        tskDescription,
+        tskUid,
+        tskId,
+        currentColor.value,
+      );
+    }
+
+    Navigator.of(context).pop();
   }
 
   @override

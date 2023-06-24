@@ -61,11 +61,56 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       id: tskId,
       displayedColor: tskDisplayedColor,
     );
-    setState(() {
-      _userScheduledTasks.add(newTsk);
-    });
     // Write the transaction to Firebase
     await tasksCollectionRef.add({
+      'name': tskName,
+      'start_datetime_planned': tskStartDatetimePlanned.millisecondsSinceEpoch,
+      'end_datetime_planned': tskEndDatetimePlanned.millisecondsSinceEpoch,
+      'start_datetime_planned_clear': tskStartDatetimePlanned,
+      'end_datetime_planned_clear': tskEndDatetimePlanned,
+      'start_datetime_as_is': tskStartDatetimeAsIs.millisecondsSinceEpoch,
+      'end_datetime_as_is': tskEndDatetimeAsIs.millisecondsSinceEpoch,
+      'is_canceled': tskIsCanceled,
+      'priority': tskPriorityName,
+      'description': tskDescription,
+      'uid': uid,
+      'id': tskId,
+      'displayed_color': tskDisplayedColor,
+    });
+  }
+
+  Future<void> _updateScheduledTask(
+    String tskName,
+    String tskCategory,
+    DateTime tskStartDatetimePlanned,
+    DateTime tskEndDatetimePlanned,
+    DateTime tskStartDatetimeAsIs,
+    DateTime tskEndDatetimeAsIs,
+    bool? tskIsCanceled,
+    String? tskPriorityName,
+    String? tskDescription,
+    String? tskUid,
+    String? tskId,
+    int tskDisplayedColor,
+  ) async {
+    print("Current name tsk: $tskName");
+
+    print("Current id tsk: $tskId");
+
+    // Write the transaction to Firebase
+    final uptodatedDoc = await tasksCollectionRef
+        .where(
+          'uid',
+          isEqualTo: uid,
+        )
+        .where(
+          'id',
+          isEqualTo: widget.tskIdtapped,
+        )
+        .limit(1)
+        .get()
+        .then((QuerySnapshot snapshot) => snapshot.docs[0].reference);
+    uptodatedDoc.update({
       'name': tskName,
       'start_datetime_planned': tskStartDatetimePlanned.millisecondsSinceEpoch,
       'end_datetime_planned': tskEndDatetimePlanned.millisecondsSinceEpoch,
@@ -91,6 +136,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
               if (snapshot.hasData) {
                 return NewScheduledTask(
                     _addNewScheduledTask,
+                    _updateScheduledTask,
                     snapshot.data!.name,
                     snapshot.data.description,
                     DateTime.now().toString(),
@@ -100,7 +146,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 return CircularProgressIndicator();
               }
             })
-        : NewScheduledTask(_addNewScheduledTask, "", "",
+        : NewScheduledTask(_addNewScheduledTask, _updateScheduledTask, "", "",
             DateTime.now().toString(), DateTime.now(), widget.tskIdtapped);
     ;
   }
