@@ -39,6 +39,9 @@ dependencies:
  
 
   flutter_riverpod: ^2.3.6
+  googleapis: ^11.2.0
+  googleapis_auth: ^1.4.1
+  google_sign_in: ^6.1.4
 
 dev_dependencies:
   flutter_test:

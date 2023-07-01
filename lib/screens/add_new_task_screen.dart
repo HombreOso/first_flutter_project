@@ -131,6 +131,5 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             })
         : NewScheduledTask(_addNewScheduledTask, _updateScheduledTask, "", "",
             DateTime.now(), DateTime.now(), widget.tskIdtapped);
-    ;
   }
 }
