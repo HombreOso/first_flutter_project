@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -66,8 +64,6 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
   @override
   void initState() {
     super.initState();
-    DateTime tskStartDatetimePlanned = widget.tskInitialStartDateTime;
-    DateTime tskEndDatetimePlanned = widget.tskInitialStartDateTime;
     print("widget.initialTitleText: ${widget.initialTitleText}");
     _tskNameController = TextEditingController(text: widget.initialTitleText);
     _descriptionController =
@@ -252,12 +248,12 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
     print("isToBeUpdated $isToBeUpdated");
 
     if (tskName.isEmpty) {
-      null;
+      return null;
     }
 
     if (convertTimeOfDayToDoubleFormatHours(_selectedEndTime!) <=
         convertTimeOfDayToDoubleFormatHours(_selectedStartTime!)) {
-      null;
+      return null;
     }
 
     print("Current color value: ${currentColor.value}");
@@ -291,9 +287,11 @@ class _NewScheduledTaskState extends ConsumerState<NewScheduledTask> {
         tskId,
         currentColor.value,
       );
+      return null;
     }
 
     Navigator.of(context).pop();
+    return null;
   }
 
   @override

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/screens/add_new_task_screen.dart';
 import 'package:flutter_complete_guide/screens/auth_screen.dart';
 import 'package:flutter_complete_guide/screens/confirm_email_screen.dart';
 import 'package:flutter_complete_guide/screens/splash_screen.dart';

@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/models/category.dart';
-import 'package:flutter_complete_guide/models/priority_enum.dart';
 import 'package:flutter_complete_guide/widgets/new_scheduled_task.dart';
 
 import '../models/scheduled_task.dart';
@@ -19,8 +17,6 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  List<ScheduledTask> _userScheduledTasks = [];
-
   static final CollectionReference tasksCollectionRef =
       FirebaseFirestore.instance.collection('tasks');
   String uid = FirebaseAuth.instance.currentUser!.uid.toString();
@@ -48,19 +44,6 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     String? tskId,
     int tskDisplayedColor,
   ) async {
-    final newTsk = ScheduledTask(
-      name: tskName,
-      start_datetime_planned: tskStartDatetimePlanned,
-      end_datetime_planned: tskEndDatetimePlanned,
-      start_datetime_as_is: tskStartDatetimeAsIs,
-      end_datetime_as_is: tskEndDatetimeAsIs,
-      is_canceled: tskIsCanceled,
-      priority: tskPriorityName,
-      description: tskDescription,
-      uid: uid,
-      id: tskId,
-      displayedColor: tskDisplayedColor,
-    );
     // Write the transaction to Firebase
     await tasksCollectionRef.add({
       'name': tskName,
