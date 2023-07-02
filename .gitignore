@@ -54,3 +54,7 @@ google-services.json
 # exclude firebase binary
 firebase-tools-instant-win.exe
 firebase.exe
+
+# exclude OAuth keyfile
+keyfile_OAuth2_time_mgmt.json
+
