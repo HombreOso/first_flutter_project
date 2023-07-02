@@ -8,8 +8,52 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:http/http.dart' as http;
+import 'package:googleapis_auth/auth_io.dart' as auth;
+import 'package:googleapis/calendar/v3.dart' as calendar;
+import 'package:flutter/services.dart' show rootBundle;
+
 import '../models/meeting_class.dart';
 import '../models/scheduled_task.dart';
+
+Future<http.Client> createGoogleClient() async {
+  final credentialsJson =
+      await rootBundle.loadString('assets/timemgmt-key_file.json');
+  final credentials = auth.ServiceAccountCredentials.fromJson(credentialsJson);
+
+  final client = await auth.clientViaServiceAccount(credentials, [
+    calendar.CalendarApi.calendarReadonlyScope,
+  ]);
+
+  return client;
+}
+
+Future<List<calendar.Event>> fetchCalendarEvents(http.Client client) async {
+  final calendarApi = calendar.CalendarApi(client);
+
+  final calendarId = 'primary'; // or provide the desired calendar ID
+
+  final now = DateTime.now().subtract(Duration(days: 20)).toUtc();
+  final events = await calendarApi.events.list(calendarId,
+      timeMin: now,
+      timeMax: now.add(Duration(days: 20)),
+      maxResults: 50,
+      singleEvents: true,
+      orderBy: 'startTime');
+
+  return events.items ?? [];
+}
+
+Future<void> _fetchEvents() async {
+  final client = await createGoogleClient();
+  final events = await fetchCalendarEvents(client);
+
+  print("Calendar Events $events");
+}
 
 final isToUpdateProvider = StateProvider<bool>(
   // We return the default sort type, here name.
@@ -42,6 +86,7 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
 
   Future<List<ScheduledTask>> get listOfTasks async {
     final snapshot = await FirebaseFirestore.instance.collection('tasks').get();
+    await _fetchEvents();
     return await snapshot.docs
         .map((doc) => ScheduledTask.fromMap(doc.data()))
         .toList()
@@ -50,6 +95,12 @@ class _CalendarScreenState extends ConsumerState<CalendarScreen> {
   }
 
   final CalendarController _controller = CalendarController();
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchEvents();
+  }
 
   @override
   Widget build(BuildContext context) {

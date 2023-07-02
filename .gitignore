@@ -56,5 +56,6 @@ firebase-tools-instant-win.exe
 firebase.exe
 
 # exclude OAuth keyfile
-keyfile_OAuth2_time_mgmt.json
+*/keyfile_OAuth2_time_mgmt.json
+*/keyfile_OAuth2_time_mgmt_service_account.json
 
