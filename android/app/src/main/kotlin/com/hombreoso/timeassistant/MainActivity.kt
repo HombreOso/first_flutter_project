@@ -1,4 +1,4 @@
-package com.example.time_mgmt_app
+package com.hombreoso.timeassistant
 
 import io.flutter.embedding.android.FlutterActivity
 
