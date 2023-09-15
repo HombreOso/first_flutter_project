@@ -10,6 +10,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:googleapis/calendar/v3.dart' as calendar;
 import 'package:http/http.dart' as http;
 
+import '../services/google_auth_service.dart';
+
 class AuthPage extends StatefulWidget {
   const AuthPage({Key? key}) : super(key: key);
 
