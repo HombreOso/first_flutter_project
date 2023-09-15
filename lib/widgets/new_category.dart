@@ -57,7 +57,8 @@ class _NewCategoryState extends State<NewCategory> {
     // if ((await namesOfCategories).contains(enteredTitle)) {
     //   enteredTitle += "_";
     // }
-    widget.addCt(enteredTitle, enteredAmount, "", widget.id, widget.ctx);
+    // widget.addCt(enteredTitle, enteredAmount, "", widget.id, widget.ctx);
+    widget.addCt(enteredTitle, enteredAmount, "", widget.id);
 
     Navigator.of(context).pop();
   }

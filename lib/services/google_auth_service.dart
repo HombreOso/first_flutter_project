@@ -13,18 +13,21 @@ import 'package:http/http.dart' as http;
 class AuthService {
   // Google Sign In
   signInWithGoogle() async {
+    print("Enter sign service");
     // begin interactive sign in process
     final GoogleSignInAccount? gUser =
         await GoogleSignIn(scopes: ['email', 'profile']).signIn();
+    print("GoogleSignInAccount done");
 
     // obtain auth details from request
     final GoogleSignInAuthentication gAuth = await gUser!.authentication;
-
+    print("GoogleSignInAuthentication done");
     // create a new credential for user
     final credential = GoogleAuthProvider.credential(
       accessToken: gAuth.accessToken,
       idToken: gAuth.idToken,
     );
+    print("GoogleAuthProvider done");
 
     // sign in
     return await FirebaseAuth.instance.signInWithCredential(credential);
