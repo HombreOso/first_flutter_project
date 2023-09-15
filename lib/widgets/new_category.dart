@@ -58,7 +58,7 @@ class _NewCategoryState extends State<NewCategory> {
     //   enteredTitle += "_";
     // }
     // widget.addCt(enteredTitle, enteredAmount, "", widget.id, widget.ctx);
-    widget.addCt(enteredTitle, enteredAmount, "", widget.id);
+    widget.addCt(enteredTitle, enteredAmount, "", widget.id, widget.ctx);
 
     Navigator.of(context).pop();
   }

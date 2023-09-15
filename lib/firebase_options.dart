@@ -44,38 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBYrA-G7QOL6u8dtG5fNNDgIHroMaSBbvo',
-    appId: '1:72926684055:web:5434b8fa76269728a2dad2',
-    messagingSenderId: '72926684055',
-    projectId: 'time-assistant-83393',
-    authDomain: 'time-assistant-83393.firebaseapp.com',
-    storageBucket: 'time-assistant-83393.appspot.com',
-    measurementId: 'G-MQVTHPB0VS',
+    apiKey: 'AIzaSyAFgt8DVB0n_0M6lQ1L9QytW7sEXtHWlX0',
+    appId: '1:109304765404:web:a8a7d2680a4ff3b28f8d19',
+    messagingSenderId: '109304765404',
+    projectId: 'time-assistant-hombreoso',
+    authDomain: 'time-assistant-hombreoso.firebaseapp.com',
+    storageBucket: 'time-assistant-hombreoso.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAjssb18sqsIzYNtS-m7OtXHorFoiKEKUE',
-    appId: '1:72926684055:android:1445ced153e03e64a2dad2',
-    messagingSenderId: '72926684055',
-    projectId: 'time-assistant-83393',
-    storageBucket: 'time-assistant-83393.appspot.com',
+    apiKey: 'AIzaSyDsJRBjQodojR08QftHtCFRfTbPH4PBkxY',
+    appId: '1:109304765404:android:6bc4c69af69da83c8f8d19',
+    messagingSenderId: '109304765404',
+    projectId: 'time-assistant-hombreoso',
+    storageBucket: 'time-assistant-hombreoso.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDZxJ3EUZpgaJKykmm2pqEO5q6s5XGKfTI',
-    appId: '1:72926684055:ios:d0885b0faedb0ebda2dad2',
-    messagingSenderId: '72926684055',
-    projectId: 'time-assistant-83393',
-    storageBucket: 'time-assistant-83393.appspot.com',
-    iosBundleId: 'com.hombreoso.timeassistant',
+    apiKey: 'AIzaSyDwdWXFTJfXIpA5j0c3D8D3xoBuVj9i7hk',
+    appId: '1:109304765404:ios:a5f826e11354d1568f8d19',
+    messagingSenderId: '109304765404',
+    projectId: 'time-assistant-hombreoso',
+    storageBucket: 'time-assistant-hombreoso.appspot.com',
+    iosBundleId: 'com.example.timeAssistant',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDZxJ3EUZpgaJKykmm2pqEO5q6s5XGKfTI',
-    appId: '1:72926684055:ios:d0885b0faedb0ebda2dad2',
-    messagingSenderId: '72926684055',
-    projectId: 'time-assistant-83393',
-    storageBucket: 'time-assistant-83393.appspot.com',
-    iosBundleId: 'com.hombreoso.timeassistant',
+    apiKey: 'AIzaSyDwdWXFTJfXIpA5j0c3D8D3xoBuVj9i7hk',
+    appId: '1:109304765404:ios:c38e9d8bcded064c8f8d19',
+    messagingSenderId: '109304765404',
+    projectId: 'time-assistant-hombreoso',
+    storageBucket: 'time-assistant-hombreoso.appspot.com',
+    iosBundleId: 'com.example.timeAssistant.RunnerTests',
   );
 }

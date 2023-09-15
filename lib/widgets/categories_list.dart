@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -86,8 +88,7 @@ class CategoriesList extends StatelessWidget {
       id: id,
     );
 
-    // Write the transaction to Firebase
-    final uptodatedDoc = await categoriesCollectionRef
+    final futureQuerySnapshotCategories = categoriesCollectionRef
         .where(
           'uid',
           isEqualTo: uid,
@@ -97,9 +98,16 @@ class CategoriesList extends StatelessWidget {
           isEqualTo: id,
         )
         .limit(1)
-        .get()
+        .get();
+    // Write the transaction to Firebase
+    final uptodatedDoc = await futureQuerySnapshotCategories
         .then((QuerySnapshot snapshot) => snapshot.docs[0].reference);
-    if (await (totalCategoriesDuration) + newCat.amount <= weekTotalDuration) {
+    final previousAmount = Category.fromMap(
+            await futureQuerySnapshotCategories.then((QuerySnapshot snapshot) =>
+                snapshot.docs[0].data() as FutureOr<Map<String, dynamic>>))
+        .toMap()["amount"];
+    if (await (totalCategoriesDuration) + newCat.amount - previousAmount <=
+        weekTotalDuration) {
       uptodatedDoc.update({
         'uid': uid,
         'name': newCat.name,
@@ -107,6 +115,7 @@ class CategoriesList extends StatelessWidget {
       });
     } else {
       _dialogBuilder(ctx);
+      print(await (totalCategoriesDuration) + newCat.amount);
     }
   }
 

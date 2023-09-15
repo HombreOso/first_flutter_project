@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1026254620863-91k07at9r1qpr1cd1vjjitffdq7mq8s5.apps.googleusercontent.com</string>
+	<string>72926684055-k3pff8g1m196qk3la25k6oun407qg4u9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1026254620863-91k07at9r1qpr1cd1vjjitffdq7mq8s5</string>
+	<string>com.googleusercontent.apps.72926684055-k3pff8g1m196qk3la25k6oun407qg4u9</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>72926684055-8vdffdibi84q34rvuu3ult9ch3qqt368.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyABBWEhQSx4idJUVo1G055gYhaWIJiUN6A</string>
+	<string>AIzaSyDZxJ3EUZpgaJKykmm2pqEO5q6s5XGKfTI</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1026254620863</string>
+	<string>72926684055</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.timeMgmtApp</string>
+	<string>com.example.timeAssistant</string>
 	<key>PROJECT_ID</key>
-	<string>time-mgmt-app-flutter</string>
+	<string>time-assistant-83393</string>
 	<key>STORAGE_BUCKET</key>
-	<string>time-mgmt-app-flutter.appspot.com</string>
+	<string>time-assistant-83393.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1026254620863:ios:ea7b809301d162015f1e0a</string>
+	<string>1:72926684055:ios:8077dac7aa5a4ef6a2dad2</string>
 </dict>
 </plist>

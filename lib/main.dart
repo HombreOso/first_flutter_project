@@ -13,6 +13,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'firebase_options.dart';
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
@@ -22,9 +24,15 @@ void main() {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return Text(
-            "Something went wrong",
-            textDirection: TextDirection.ltr,
+          return SafeArea(
+            child: Column(
+              children: [
+                Text(
+                  '${snapshot.error.toString()}',
+                  textDirection: TextDirection.ltr,
+                ),
+              ],
+            ),
           );
         }
 

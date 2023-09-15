@@ -1,4 +1,4 @@
-# time_mgmt_app
+# time_assistant
 
 A new Flutter project.
 

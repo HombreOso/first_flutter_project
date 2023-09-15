@@ -1,6 +1,6 @@
 {
-    "name": "time_mgmt_app",
-    "short_name": "time_mgmt_app",
+    "name": "time_assistant",
+    "short_name": "time_assistant",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

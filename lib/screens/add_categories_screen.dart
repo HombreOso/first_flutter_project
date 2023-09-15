@@ -74,8 +74,8 @@ class _CategoryScreenState extends State<CategoryScreen> {
     return totalDuration;
   }
 
-  Future<void> _addNewCategory(
-      String ctName, double ctAmount, String nameCurrentCt, String id) async {
+  Future<void> _addNewCategory(String ctName, double ctAmount,
+      String nameCurrentCt, String id, BuildContext ctx) async {
     final String categoryIdAsCurrentDateTime = DateTime.now().toString();
     final newCt = Category(
       name: ctName,
@@ -174,7 +174,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               children: <Widget>[
                 !loadedCategories.isEmpty
                     ? Padding(
-                        padding: EdgeInsets.only(top: 12.0, bottom: 12.0),
+                        padding: EdgeInsets.only(top: 18.0, bottom: 12.0),
                         child: PieChart(
                           dataMap: loadedCategoriesDurationMap,
                           animationDuration: Duration(seconds: 0),

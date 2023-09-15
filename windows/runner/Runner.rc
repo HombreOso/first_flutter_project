@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "Time Assistant" "\0"
+            VALUE "FileDescription", "time_assistant" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "Time Assistant" "\0"
+            VALUE "InternalName", "time_assistant" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "time_mgmt_app.exe" "\0"
-            VALUE "ProductName", "Time Assistant" "\0"
+            VALUE "OriginalFilename", "time_assistant.exe" "\0"
+            VALUE "ProductName", "time_assistant" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
