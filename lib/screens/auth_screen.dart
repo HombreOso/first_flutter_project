@@ -30,64 +30,51 @@ class _AuthPageState extends State<AuthPage> {
   bool _passwordVisible = false;
   bool _usernameVisible = true;
 
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-      scopes: ['email', 'https://www.googleapis.com/auth/calendar.readonly']);
-  calendar.CalendarApi? _calendarApi;
-  List<calendar.Event> _events = [];
+  // GoogleSignIn _googleSignIn = GoogleSignIn(
+  //     scopes: ['email', 'https://www.googleapis.com/auth/calendar.readonly']);
+  // calendar.CalendarApi? _calendarApi;
+  // List<calendar.Event> _events = [];
   bool _isLoading_google = false;
 
   @override
   void initState() {
     super.initState();
-    _googleSignIn = GoogleSignIn(
-        scopes: ['email', 'https://www.googleapis.com/auth/calendar.readonly']);
-    _calendarApi = calendar.CalendarApi(http.Client());
   }
 
-  Future<void> _fetchEvents() async {
-    setState(() {
-      _isLoading = true;
-    });
+  // Future<void> _fetchEvents() async {
+  //   setState(() {
+  //     _isLoading = true;
+  //   });
 
-    try {
-      final googleAccount = _googleSignIn.currentUser;
-      final authHeaders = await googleAccount!.authHeaders;
-      final httpClient = http.Client();
-      final calendarApi = calendar.CalendarApi(httpClient);
-      final now = DateTime.now().toUtc();
-      final events = await calendarApi.events.list(
-        'primary',
-        timeMin: now,
-        timeMax: now,
-        maxResults: 10,
-        singleEvents: true,
-        orderBy: 'startTime',
-      );
+  //   try {
+  //     final googleAccount = _googleSignIn.currentUser;
+  //     final authHeaders = await googleAccount!.authHeaders;
+  //     final httpClient = http.Client();
+  //     final calendarApi = calendar.CalendarApi(httpClient);
+  //     final now = DateTime.now().toUtc();
+  //     final events = await calendarApi.events.list(
+  //       'primary',
+  //       timeMin: now,
+  //       timeMax: now,
+  //       maxResults: 10,
+  //       singleEvents: true,
+  //       orderBy: 'startTime',
+  //     );
 
-      setState(() {
-        _events = events.items ?? [];
-        _isLoading = false;
-      });
-    } catch (error) {
-      print('Failed to fetch events: $error');
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
+  //     setState(() {
+  //       _events = events.items ?? [];
+  //       _isLoading = false;
+  //     });
+  //   } catch (error) {
+  //     print('Failed to fetch events: $error');
+  //     setState(() {
+  //       _isLoading = false;
+  //     });
+  //   }
+  // }
 
-  _signInWithGoogle() async {
-    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
-
-    final GoogleSignInAuthentication gAuth = await gUser!.authentication;
-
-    final credential = GoogleAuthProvider.credential(
-      accessToken: gAuth.accessToken,
-      idToken: gAuth.idToken,
-    );
-
-    return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
+  //   return await FirebaseAuth.instance.signInWithCredential(credential);
+  // }
 
   Future<User?> signUp(
       {required String userEmail,
@@ -301,7 +288,7 @@ class _AuthPageState extends State<AuthPage> {
                       child: Text(_isLogin ? 'Sign In' : 'Sign Up')),
               TextButton(
                 onPressed: () async {
-                  await _signInWithGoogle();
+                  await AuthService().signInWithGoogle();
                 },
                 child: Text("Google Sign In"),
               ),
